@@ -123,6 +123,23 @@ All notable Ginhawa changes are documented here. Versions follow the Git tag or 
 
 - Run `php artisan migrate --force`, `php artisan storage:link` is no longer required for verification documents, and run `php artisan optimize:clear` after updating.
 
+## [alpha-release-v.1.0.8] - 2026-09-24
+
+### Profile
+
+- Added reliable authenticated avatar and cover-photo delivery that works without a public `storage` symlink.
+- Added a complete profile citizen-ID generator and PNG export using the member's assigned title, roles, jurisdiction, and citizen number.
+- Added visible title/designation and role details to the profile dashboard.
+- Added password change with current-password verification and confirmed new password fields.
+
+### Database
+
+- Added a migration to backfill citizen numbers for existing accounts.
+
+### Deployment
+
+- Run `php artisan migrate --force` and `php artisan optimize:clear` after updating.
+
 ## Unreleased
 
 Future changes should be added here before the next release tag.
