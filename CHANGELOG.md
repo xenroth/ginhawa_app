@@ -92,6 +92,18 @@ All notable Ginhawa changes are documented here. Versions follow the Git tag or 
 
 - Confirmed the existing `/profile` dashboard supports name, phone, social handle, privacy, avatar, cover photo, and verification document management.
 
+## [alpha-release-v.1.0.6] - 2026-09-24
+
+### Fixed
+
+- Removed the duplicate `/community` route alias named `forum`.
+- Ensured Laravel registers the `GET /community` endpoint under the `community` route name used by the shared layout.
+- Prevented the `Route [community] not defined` production 500 error after route-cache clearing.
+
+### Deployment
+
+- After updating, run `php artisan optimize:clear` and verify with `php artisan route:list --path=community`.
+
 ## Unreleased
 
 Future changes should be added here before the next release tag.
