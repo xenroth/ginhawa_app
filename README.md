@@ -2,6 +2,8 @@
 
 Ginhawa is a Laravel 12 community forum and global organization application by **Akhzaroth Khan (Richard C. Cupal, LPT)**. The supplied organization and forum templates remain in the project root as source references; their pitch-black, silver-metal, scanline, Courier Prime, Oswald, Font Awesome, terminal, filtering, modal, and Web Audio interaction language is integrated into the Blade experience.
 
+Current release: `alpha-release-v.1.0.1` ([version file](VERSION)). See [CHANGELOG.md](CHANGELOG.md) for release history and deployment notes.
+
 ## First run
 
 1. Install PHP 8.2+, Composer, and a database driver. The application uses Laravel 12.
@@ -15,7 +17,7 @@ The web middleware checks for the `roles` table on the first request and automat
 ## Main routes
 
 - `/` global organization page, four pillars, encrypted terminal
-- `/forum` public forum hub with sector filtering, search, thread modal, and transmission form
+- `/community` member-only community hub with sector filtering, search, thread modal, replies, and transmission form
 - `/register` pending registration workflow
 - `/admin` moderator and administrator dashboard
 

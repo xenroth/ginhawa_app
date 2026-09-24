@@ -11,5 +11,5 @@ return [
     'key' => env('APP_KEY'),
     'cipher' => 'AES-256-CBC',
     'providers' => Illuminate\Support\ServiceProvider::defaultProviders()->merge([])->toArray(),
-    'aliases' => [],
+    'aliases' => ['Storage' => Illuminate\Support\Facades\Storage::class],
 ];

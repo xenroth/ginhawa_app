@@ -2,7 +2,10 @@
 <html lang="en" class="dark">
 <head>
     <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $title ?? 'GINHAWA // Covenant Network' }}</title>
+    <title>{{ $title ?? \App\Models\SiteSetting::value('seo_title', 'GINHAWA // Covenant Network') }}</title>
+    <meta name="description" content="{{ \App\Models\SiteSetting::value('seo_description', 'A member-led network for human preservation and community intelligence.') }}">
+    <meta name="keywords" content="{{ \App\Models\SiteSetting::value('seo_keywords', 'Ginhawa, community, preservation, covenant') }}">
+    @if($favicon = \App\Models\SiteSetting::value('site_favicon'))<link rel="icon" href="{{ Storage::disk('public')->url($favicon) }}">@endif
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
