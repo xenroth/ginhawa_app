@@ -4,7 +4,7 @@ Ginhawa is a Laravel 11 community forum and global organization application by *
 
 ## First run
 
-1. Install PHP 8.2+, Composer, and a database driver.
+1. Install PHP 8.2+, Composer, and a database driver. The application uses Laravel 12.
 2. Run `composer install`.
 3. Copy `.env.example` to `.env` and set `DB_HOST`, `DB_DATABASE`, `DB_USERNAME`, and `DB_PASSWORD`. SQLite works with `DB_DATABASE=database/database.sqlite`.
 4. Run `php artisan key:generate`.

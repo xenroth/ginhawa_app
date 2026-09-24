@@ -1,16 +1,16 @@
 # Ginhawa Shared Hosting Deployment Guide
 
-This guide targets iFastNet Premium/cPanel-style hosting. The account must provide PHP 8.2+, MySQL/MariaDB, Apache rewrite support, and either a configurable domain document root or a way to keep the Laravel project outside `public_html`.
+This guide targets iFastNet Premium/cPanel-style hosting. The account must provide PHP 8.2+, Laravel 12-compatible Composer dependencies, MySQL/MariaDB, Apache rewrite support, and either a configurable domain document root or a way to keep the Laravel project outside `public_html`.
 
 ## A. Build the release locally
 
 ```powershell
-composer install --no-dev --optimize-autoloader
+composer update --no-dev --optimize-autoloader
 Copy-Item .env.example .env
 php artisan key:generate
 ```
 
-Do not upload your local `.env`. Create a production `.env` on the server. Upload `vendor/`; shared hosting may not have Composer or SSH.
+The first run uses `composer update` because this repository may not contain `composer.lock` yet. Commit the generated `composer.lock` afterward, then future deployments should use `composer install --no-dev --optimize-autoloader`. Do not upload your local `.env`. Create a production `.env` on the server. Upload `vendor/`; shared hosting may not have Composer or SSH.
 
 ## B. Create the database
 
