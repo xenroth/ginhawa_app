@@ -81,6 +81,17 @@ All notable Ginhawa changes are documented here. Versions follow the Git tag or 
 
 - Added migration `2026_09_24_000006_add_identity_assignment_fields` for member identity assignments.
 
+## [alpha-release-v.1.0.5] - 2026-09-24
+
+### Added
+
+- Added a clickable authenticated username control in the shared header.
+- Added account actions for Profile & Verification, Community, Admin Command, and Logout.
+
+### Profile management
+
+- Confirmed the existing `/profile` dashboard supports name, phone, social handle, privacy, avatar, cover photo, and verification document management.
+
 ## Unreleased
 
 Future changes should be added here before the next release tag.
