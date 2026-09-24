@@ -41,6 +41,12 @@ All notable Ginhawa changes are documented here. Versions follow the Git tag or 
 - Removed the public `/forum` endpoint in favor of the authenticated `/community` endpoint.
 - Made post tag decoding and visibility queries safe for approved content.
 
+### Deployment notes
+
+- Run `php artisan migrate --force` to apply the profile, CMS, verification, and community migrations.
+- Run `php artisan storage:link` before using profile, verification, favicon, or logo uploads.
+- Run `php artisan optimize:clear` after deployment.
+
 ## Unreleased
 
 Future changes should be added here before the next release tag.
