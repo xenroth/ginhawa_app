@@ -79,7 +79,7 @@ Only published releases are accepted. Create semantic tags such as `v0.2.0`. The
 It does not run Composer or migrations automatically. After releases that change dependencies or schema, run:
 
 ```bash
-composer install --no-dev --optimize-autoloader
+composer dump-autoload --no-dev --optimize
 php artisan migrate --force
 php artisan optimize:clear
 ```
