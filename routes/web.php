@@ -7,7 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommunityInteractionController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'global')->middleware('auth')->name('home');
+Route::view('/', 'global')->name('home');
 Route::view('/login', 'auth.login')->middleware('guest')->name('login');
 Route::view('/register', 'auth.register')->middleware('guest')->name('register');
 Route::post('/login', [AuthController::class, 'login'])->middleware('guest');

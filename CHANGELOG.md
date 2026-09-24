@@ -47,6 +47,19 @@ All notable Ginhawa changes are documented here. Versions follow the Git tag or 
 - Run `php artisan storage:link` before using profile, verification, favicon, or logo uploads.
 - Run `php artisan optimize:clear` after deployment.
 
+## [alpha-release-v.1.0.2] - 2026-09-24
+
+### Added
+
+- Restored the homepage organization experience with hero metrics, four pillars, identity generator, member access, and encrypted terminal sections.
+- Added an embedded login form directly to the homepage.
+- Added authenticated citizen-card preview binding and PNG export using the registered user's citizen number.
+
+### Changed
+
+- The homepage is publicly viewable for orientation, while `/community`, profiles, identity downloads, and member tools remain authenticated.
+- Guest citizen-card previews are visibly locked until registration and login.
+
 ## Unreleased
 
 Future changes should be added here before the next release tag.
