@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\SiteSetting;
 
 class AuthController extends Controller
 {
@@ -17,7 +18,7 @@ class AuthController extends Controller
             do {
                 $citizenNumber = 'GHW-'.strtoupper(bin2hex(random_bytes(2))).'-'.strtoupper(bin2hex(random_bytes(2))).'-'.now()->year;
             } while (User::where('citizen_number', $citizenNumber)->exists());
-            $user = User::create(array_merge($data, ['citizen_number' => $citizenNumber, 'status' => 'pending']));
+            $user = User::create(array_merge($data, ['citizen_number' => $citizenNumber, 'status' => 'pending', 'jurisdiction' => SiteSetting::value('default_jurisdiction', 'Local Community / Own Country'), 'designation' => SiteSetting::value('default_designation', 'Ginhawa Citizen')]));
             $user->roles()->attach(Role::where('name', 'citizen')->firstOrFail());
         });
         return redirect()->route('login')->with('success', 'Registration received. Your citizen number has been reserved and council approval is required before posting.');

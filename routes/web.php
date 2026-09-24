@@ -36,4 +36,5 @@ Route::patch('/admin/settings', [AdminController::class, 'updateSettings'])->mid
 Route::post('/admin/roles', [AdminController::class, 'storeRole'])->middleware(['auth', 'role:administrator'])->name('admin.roles.store');
 Route::post('/admin/sectors', [AdminController::class, 'storeSector'])->middleware(['auth', 'role:administrator'])->name('admin.sectors.store');
 Route::post('/admin/directives', [AdminController::class, 'storeDirective'])->middleware(['auth', 'role:administrator'])->name('admin.directives.store');
+Route::patch('/admin/users/{user}/identity', [AdminController::class, 'assignIdentity'])->middleware(['auth', 'role:administrator'])->name('admin.users.identity');
 Route::patch('/admin/verifications/{verification}', [AdminController::class, 'reviewVerification'])->middleware(['auth', 'role:administrator,moderator'])->name('admin.verifications.update');

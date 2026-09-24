@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class User extends Authenticatable
 {
     use Notifiable;
-    protected $fillable = ['name', 'email', 'password', 'approved_at', 'status', 'citizen_number', 'phone', 'social_handle', 'avatar_path', 'cover_path', 'profile_visibility', 'hide_contact'];
+    protected $fillable = ['name', 'email', 'password', 'approved_at', 'status', 'citizen_number', 'phone', 'social_handle', 'avatar_path', 'cover_path', 'profile_visibility', 'hide_contact', 'jurisdiction', 'designation'];
     protected $hidden = ['password', 'remember_token'];
     protected function casts(): array { return ['email_verified_at' => 'datetime', 'approved_at' => 'datetime', 'password' => 'hashed']; }
     public function roles(): BelongsToMany { return $this->belongsToMany(Role::class); }

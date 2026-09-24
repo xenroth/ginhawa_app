@@ -68,6 +68,19 @@ All notable Ginhawa changes are documented here. Versions follow the Git tag or 
 - Added dedicated navigation for CMS settings and verification review.
 - Improved citizen registry controls, post moderation actions, release checking, metrics, and destructive-action confirmation.
 
+## [alpha-release-v.1.0.4] - 2026-09-24
+
+### Changed
+
+- Hide the homepage member-access section after authentication; signed-in members see the community entry instead.
+- Replace hardcoded identity values with admin-managed defaults and per-member jurisdiction/designation assignments.
+- Replace visible BAKUNAWA terminology with GINHAWA branding across the application interface.
+- Make the shared header website name and tagline editable from `/admin/settings`.
+
+### Database
+
+- Added migration `2026_09_24_000006_add_identity_assignment_fields` for member identity assignments.
+
 ## Unreleased
 
 Future changes should be added here before the next release tag.
