@@ -104,6 +104,25 @@ All notable Ginhawa changes are documented here. Versions follow the Git tag or 
 
 - After updating, run `php artisan optimize:clear` and verify with `php artisan route:list --path=community`.
 
+## [alpha-release-v.1.0.7] - 2026-09-24
+
+### Fixed
+
+- Added non-destructive content schema repair for missing post moderation columns and managed sectors/directives.
+- Wrapped community loading, transmission creation/edit/delete, moderation, and replies with logging and user-safe failure messages.
+- Added an orphan-safe post author relationship so old records cannot crash the community/admin feed.
+- Restricted verification uploads to JPG, JPEG, and PNG files.
+- Replaced broken public verification URLs with authenticated document downloads from private storage.
+
+### Admin improvements
+
+- Added typed member search for identity assignment with a maximum of 10 results.
+- Kept managed sectors connected to community validation and added clearer synchronization feedback.
+
+### Deployment
+
+- Run `php artisan migrate --force`, `php artisan storage:link` is no longer required for verification documents, and run `php artisan optimize:clear` after updating.
+
 ## Unreleased
 
 Future changes should be added here before the next release tag.

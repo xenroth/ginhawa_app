@@ -16,6 +16,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->n
 Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
 Route::patch('/profile', [ProfileController::class, 'update'])->middleware('auth')->name('profile.update');
 Route::post('/profile/verification', [ProfileController::class, 'submitVerification'])->middleware('auth')->name('profile.verification');
+Route::get('/admin/verifications/{verification}/document', [ProfileController::class, 'downloadVerification'])->middleware(['auth', 'role:administrator,moderator'])->name('admin.verifications.document');
 Route::post('/community/posts/{post}/comments', [CommunityInteractionController::class, 'comment'])->middleware('auth')->name('community.comments.store');
 Route::post('/members/{user}/connect', [CommunityInteractionController::class, 'connect'])->middleware('auth')->name('members.connect');
 Route::post('/members/{user}/message', [CommunityInteractionController::class, 'message'])->middleware('auth')->name('members.message');
@@ -36,4 +37,5 @@ Route::post('/admin/roles', [AdminController::class, 'storeRole'])->middleware([
 Route::post('/admin/sectors', [AdminController::class, 'storeSector'])->middleware(['auth', 'role:administrator'])->name('admin.sectors.store');
 Route::post('/admin/directives', [AdminController::class, 'storeDirective'])->middleware(['auth', 'role:administrator'])->name('admin.directives.store');
 Route::patch('/admin/users/{user}/identity', [AdminController::class, 'assignIdentity'])->middleware(['auth', 'role:administrator'])->name('admin.users.identity');
+Route::get('/admin/users/search', [AdminController::class, 'searchUsers'])->middleware(['auth', 'role:administrator'])->name('admin.users.search');
 Route::patch('/admin/verifications/{verification}', [AdminController::class, 'reviewVerification'])->middleware(['auth', 'role:administrator,moderator'])->name('admin.verifications.update');

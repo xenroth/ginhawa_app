@@ -18,8 +18,15 @@ class ProfileController extends Controller
     }
     public function submitVerification(Request $request)
     {
-        $data = $request->validate(['valid_id' => ['required', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'], 'social_handle' => ['required', 'string', 'max:120'], 'mobile_number' => ['required', 'string', 'max:30']]);
-        $request->user()->verificationDocuments()->create(['valid_id_path' => $request->file('valid_id')->store('verification', 'public'), 'social_handle' => $data['social_handle'], 'mobile_number' => $data['mobile_number'], 'status' => 'pending']);
+        $data = $request->validate(['valid_id' => ['required', 'file', 'mimes:jpg,jpeg,png', 'max:5120'], 'social_handle' => ['required', 'string', 'max:120'], 'mobile_number' => ['required', 'string', 'max:30']]);
+        $request->user()->verificationDocuments()->create(['valid_id_path' => $request->file('valid_id')->store('verification'), 'social_handle' => $data['social_handle'], 'mobile_number' => $data['mobile_number'], 'status' => 'pending']);
         return back()->with('success', 'Verification documents submitted for council review.');
+    }
+
+    public function downloadVerification(Request $request, \App\Models\VerificationDocument $verification)
+    {
+        abort_unless($request->user()->hasAnyRole(['administrator', 'moderator']), 403);
+        abort_unless($verification->valid_id_path && Storage::disk('local')->exists($verification->valid_id_path), 404);
+        return Storage::disk('local')->download($verification->valid_id_path);
     }
 }
