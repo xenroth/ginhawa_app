@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GINHAWA // GLOBAL COVENANT & RECRUITMENT ORDER</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600;800;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        silver: {
+                            100: '#F5F5F7',
+                            200: '#E5E5EA',
+                            300: '#D1D1D6',
+                            400: '#C0C0C0', // Pure Silver
+                            500: '#A1A1A6',
+                            600: '#8E8E93',
+                            700: '#636366',
+                            800: '#3A3A3C',
+                            900: '#1C1C1E',
+                            chrome: '#E8E8E8'
+                        },
+                        pitch: {
+                            950: '#030304',
+                            900: '#070708',
+                            800: '#0E0E10',
+                            700: '#18181C',
+                            600: '#24242A'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        oswald: ['Oswald', 'sans-serif'],
+                        mono: ['Courier Prime', 'monospace'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base Dark Setup */
+        body {
+            background-color: #030304;
+            color: #F5F5F7;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Scanline Overlay Effect */
+        .scanline-bg {
+            background: linear-gradient(
+                rgba(255, 255, 255, 0) 50%, 
+                rgba(0, 0, 0, 0.4) 50%
+            ), linear-gradient(
+                90deg,
+                rgba(255, 0, 0, 0.03),
+                rgba(0, 255, 0, 0.01),
+                rgba(0, 0, 255, 0.03)
+            );
+            background-size: 100% 3px, 6px 100%;
+            pointer-events: none;
+        }
+
+        /* Metallic Chrome Text Glow */
+        .text-chrome {
+            background: linear-gradient(135deg, #FFFFFF 0%, #C0C0C0 35%, #707070 50%, #E8E8E8 70%, #FFFFFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 0px 12px rgba(192, 192, 192, 0.4));
+        }
+
+        .text-silver-glow {
+            text-shadow: 0 0 10px rgba(229, 229, 234, 0.6), 0 0 20px rgba(192, 192, 192, 0.2);
+        }
+
+        /* Silver Foil Metallic Border Effect */
+        .border-silver-foil {
+            border: 1px solid;
+            border-image: linear-gradient(135deg, #FFFFFF, #8E8E93, #E8E8E8, #3A3A3C) 1;
+        }
+
+        /* Animated Hologram Shimmer */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .holographic-shimmer {
+            background: linear-gradient(
+                115deg, 
+                rgba(255,255,255,0) 0%, 
+                rgba(255,255,255,0.08) 25%, 
+                rgba(192,192,192,0.3) 45%, 
+                rgba(255,255,255,0.5) 50%, 
+                rgba(192,192,192,0.3) 55%, 
+                rgba(255,255,255,0.08) 75%, 
+                rgba(255,255,255,0) 100%
+            );
+            background-size: 200% 100%;
+            animation: shimmer 6s infinite linear;
+        }
+
+        /* Brutalist Hard Shadows for Retro Gangster Aesthetic */
+        .brutalist-shadow-white {
+            box-shadow: 6px 6px 0px 0px #FFFFFF;
+        }
+        .brutalist-shadow-silver {
+            box-shadow: 6px 6px 0px 0px #C0C0C0;
+        }
+        .brutalist-shadow-dark {
+            box-shadow: 6px 6px 0px 0px #18181C;
+        }
+
+        /* Button Hover Transforms */
+        .brutal-btn:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0px 0px #C0C0C0;
+        }
+
+        /* Halftone Dot Pattern */
+        .bg-halftone {
+            background-image: radial-gradient(#3A3A3C 15%, transparent 15%);
+            background-size: 10px 10px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030304;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3A3A3C;
+            border-radius: 2px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C0C0C0;
+        }
+
+        /* Dragon Canvas Overlay */
+        #particleCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-pitch-950 text-silver-100 antialiased selection:bg-silver-400 selection:text-black relative">
+
+    <!-- Scanline Effect Layer -->
+    <div class="fixed inset-0 scanline-bg z-30 pointer-events-none opacity-40"></div>
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-pitch-950/90 backdrop-blur-md border-b border-silver-800 text-xs py-3 px-4 md:px-8 flex items-center justify-between">
+        <!-- Logo & Title -->
+        <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-sm bg-white text-black font-black flex items-center justify-center font-oswald text-lg tracking-tighter border border-silver-400">
+                息
+            </div>
+            <div>
+                <span class="font-cinzel font-black tracking-widest text-sm text-white">GINHAWA</span>
+                <span class="text-[10px] font-mono text-silver-500 hidden sm:inline-block ml-2">// GLOBAL ORDER (呼吸)</span>
+            </div>
+        </div>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center space-x-8 font-mono text-xs uppercase tracking-wider font-bold">
+            <a href="#mission" onclick="playSfx('click')" class="hover:text-silver-400 transition hover:underline decoration-silver-400 underline-offset-4">01. Mission</a>
+            <a href="#directives" onclick="playSfx('click')" class="hover:text-silver-400 transition hover:underline decoration-silver-400 underline-offset-4">02. Directives</a>
+            <a href="#identity-generator" onclick="playSfx('click')" class="hover:text-silver-400 transition hover:underline decoration-silver-400 underline-offset-4">03. Membership ID</a>
+            <a href="#terminal" onclick="playSfx('click')" class="hover:text-silver-400 transition hover:underline decoration-silver-400 underline-offset-4">04. Terminal</a>
+        </nav>
+
+        <!-- Action Controls -->
+        <div class="flex items-center space-x-3">
+            <!-- Audio Toggle -->
+            <button onclick="toggleAudio()" id="audioBtn" title="Toggle UI SFX" class="border border-silver-700 bg-pitch-900 px-3 py-1 rounded text-xs font-mono flex items-center space-x-2 hover:border-silver-400 transition">
+                <i class="fa-solid fa-volume-xmark text-red-400" id="audioIcon"></i>
+                <span id="audioStatus" class="hidden sm:inline text-[10px] text-silver-400">SFX OFF</span>
+            </button>
+
+            <!-- Recruitment CTA button -->
+            <a href="#identity-generator" onclick="playSfx('click')" class="bg-white text-black font-mono font-bold px-4 py-1.5 text-xs uppercase tracking-widest border border-white hover:bg-silver-300 transition shadow-sm">
+                Join Order
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <main class="relative pt-14">
+
+        <!-- HERO SECTION -->
+        <section class="relative min-h-[92vh] flex flex-col justify-center items-center text-center px-4 md:px-12 py-16 border-b border-silver-800 bg-pitch-900 overflow-hidden">
+            <!-- Particle Canvas -->
+            <canvas id="particleCanvas"></canvas>
+
+            <!-- Background Kanji Watermark -->
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5 select-none font-cinzel text-[22vw] text-white font-black">
+                GINHAWA
+            </div>
+
+            <div class="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
+                
+                <!-- Animated Dragon Crest Emblem (SVG) -->
+                <div class="relative mb-8 group cursor-pointer" onclick="playSfx('dragon')">
+                    <div class="w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-silver-400/50 p-2 bg-pitch-950 flex items-center justify-center shadow-2xl shadow-silver-400/10 group-hover:border-white transition-all duration-500">
+                        <!-- Dragon + Oxygen Waves SVG -->
+                        <svg viewBox="0 0 200 200" class="w-full h-full text-silver-300 animate-spin-slow">
+                            <!-- Outer Breathing Ring -->
+                            <circle cx="100" cy="100" r="90" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="12 6" opacity="0.6"/>
+                            <circle cx="100" cy="100" r="82" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                            <!-- Inner Bakunawa Dragon Outline -->
+                            <path d="M100 20 C130 20 160 40 160 70 C160 90 145 105 130 110 C110 115 100 130 100 150 C100 170 120 180 140 180" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M100 20 C70 20 40 40 40 70 C40 90 55 105 70 110 C90 115 100 130 100 150" fill="none" stroke="#C0C0C0" stroke-width="2" stroke-dasharray="4 4"/>
+                            <!-- Moon/Air Nucleus -->
+                            <circle cx="100" cy="70" r="14" fill="#FFFFFF" class="animate-pulse"/>
+                            <circle cx="100" cy="70" r="22" fill="none" stroke="#FFFFFF" stroke-width="1" opacity="0.5"/>
+                        </svg>
+                        <!-- Center Kanji -->
+                        <span class="absolute font-oswald text-3xl font-black text-black bg-white px-2 py-0.5 rounded-sm shadow-lg">
+                            命
+                        </span>
+                    </div>
+                    <div class="text-[10px] font-mono text-silver-500 uppercase tracking-widest mt-2">
+                        [ BAKUNAWA COVENANT // BREATH OF LIFE ]
+                    </div>
+                </div>
+
+                <!-- Main Tagline Badge -->
+                <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-silver-700 bg-pitch-950/80 text-silver-300 font-mono text-xs uppercase tracking-widest mb-6 border-silver-foil">
+                    <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+                    <span>Global Resistance & Preservation Order</span>
+                </div>
+
+                <!-- Title Header -->
+                <h1 class="font-oswald text-5xl sm:text-7xl md:text-9xl font-black tracking-tight uppercase leading-none mb-6">
+                    <span class="text-white">GIN</span><span class="text-chrome">HAWA</span>
+                </h1>
+
+                <!-- Subtitle Tagline -->
+                <p class="font-cinzel text-lg sm:text-xl md:text-2xl text-silver-300 tracking-wider max-w-3xl leading-relaxed mb-8">
+                    "RETAIN HUMANITY. PRESERVE THE BREATH. ERADICATE CORRUPTION."
+                </p>
+
+                <p class="font-mono text-xs sm:text-sm text-silver-500 max-w-2xl mx-auto mb-10 leading-relaxed border-l-2 border-silver-400 pl-4 text-left">
+                    Rooted in the ancient Bisaya spirit of <strong class="text-white">Ginhawa</strong> (The Vital Breath) and armored by the shadow council of the <strong class="text-white">Bakunawa Dragon</strong>. An open global underground order protecting human sovereignty against systemic corruption.
+                </p>
+
+                <!-- Dual CTAs -->
+                <div class="flex flex-col sm:flex-row items-center gap-4 w-full justify-center font-mono text-xs">
+                    <a href="#identity-generator" onclick="playSfx('click')" class="w-full sm:w-auto bg-white text-black font-black px-8 py-4 uppercase tracking-widest border-2 border-white brutalist-shadow-silver brutal-btn transition text-center">
+                        <i class="fa-solid fa-id-card mr-2"></i> Register As Citizen
+                    </a>
+                    <a href="#identity-generator" onclick="playSfx('click')" class="w-full sm:w-auto bg-pitch-950 text-silver-200 font-bold px-8 py-4 uppercase tracking-widest border-2 border-silver-500 hover:border-white transition text-center hover:bg-pitch-800">
+                        <i class="fa-solid fa-dragon mr-2 text-silver-400"></i> Pledge Official Operative
+                    </a>
+                </div>
+
+                <!-- Live Global Ticker Bar -->
+                <div class="w-full max-w-4xl mt-16 pt-8 border-t border-silver-800/80 grid grid-cols-2 md:grid-cols-4 gap-6 font-mono text-left">
+                    <div class="border-l border-silver-700 pl-3">
+                        <div class="text-[10px] text-silver-500 uppercase">PROTECTED CITIZENS</div>
+                        <div class="text-2xl font-bold font-oswald text-white" id="statCitizens">148,920</div>
+                    </div>
+                    <div class="border-l border-silver-700 pl-3">
+                        <div class="text-[10px] text-silver-500 uppercase">ACTIVE OPERATIVES</div>
+                        <div class="text-2xl font-bold font-oswald text-white" id="statOperatives">12,405</div>
+                    </div>
+                    <div class="border-l border-silver-700 pl-3">
+                        <div class="text-[10px] text-silver-500 uppercase">GLOBAL SECTORS</div>
+                        <div class="text-2xl font-bold font-oswald text-white">88 NODES</div>
+                    </div>
+                    <div class="border-l border-silver-700 pl-3">
+                        <div class="text-[10px] text-silver-500 uppercase">PURITY RATING</div>
+                        <div class="text-2xl font-bold font-oswald text-silver-300">100% UNCORRUPTED</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- MISSION & CORE DIRECTIVES SECTION -->
+        <section id="directives" class="py-20 px-4 md:px-12 bg-pitch-950 border-b border-silver-800 relative">
+            <div class="max-w-6xl mx-auto">
+                
+                <!-- Section Header -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b border-silver-800 pb-6">
+                    <div>
+                        <div class="font-mono text-xs text-silver-400 uppercase tracking-widest">// THE FOUR PILLARS (PAGPANALIPOD)</div>
+                        <h2 class="font-oswald text-4xl md:text-6xl font-bold uppercase tracking-tight text-white mt-1">
+                            CORE DIRECTIVES OF GINHAWA
+                        </h2>
+                    </div>
+                    <p class="font-mono text-xs text-silver-500 max-w-md mt-4 md:mt-0">
+                        Every member—whether a protected Citizen or an Official Operative—is bound by the charter of human preservation.
+                    </p>
+                </div>
+
+                <!-- 4 Pillars Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-mono">
+                    
+                    <!-- Pillar 1 -->
+                    <div class="bg-pitch-900 border border-silver-800 p-6 rounded-none relative group hover:border-silver-400 transition-all duration-300 flex flex-col justify-between">
+                        <div class="absolute top-4 right-4 text-3xl font-oswald font-black text-pitch-700 group-hover:text-silver-400 transition">01</div>
+                        <div>
+                            <div class="w-12 h-12 bg-white text-black font-oswald font-black text-xl flex items-center justify-center mb-6">
+                                命
+                            </div>
+                            <div class="text-[10px] text-silver-400 uppercase tracking-widest mb-1">PILLAR I (PAGTIPIG)</div>
+                            <h3 class="font-oswald text-2xl font-bold text-white mb-3 uppercase">PRESERVE HUMAN LIFE</h3>
+                            <p class="text-xs text-silver-400 leading-relaxed">
+                                Life is non-negotiable. Ginhawa deploys safehavens, medical logistics, and physical sanctuary for those targeted by corrupt regimes.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-silver-800/80 text-[10px] text-silver-500 uppercase">
+                            STATUS: ACTIVE MANDATE
+                        </div>
+                    </div>
+
+                    <!-- Pillar 2 -->
+                    <div class="bg-pitch-900 border border-silver-800 p-6 rounded-none relative group hover:border-silver-400 transition-all duration-300 flex flex-col justify-between">
+                        <div class="absolute top-4 right-4 text-3xl font-oswald font-black text-pitch-700 group-hover:text-silver-400 transition">02</div>
+                        <div>
+                            <div class="w-12 h-12 bg-silver-400 text-black font-oswald font-black text-xl flex items-center justify-center mb-6">
+                                護
+                            </div>
+                            <div class="text-[10px] text-silver-400 uppercase tracking-widest mb-1">PILLAR II (KAUGALINGON)</div>
+                            <h3 class="font-oswald text-2xl font-bold text-white mb-3 uppercase">RETAIN HUMANITY</h3>
+                            <p class="text-xs text-silver-400 leading-relaxed">
+                                Resisting dehumanization. Protecting bodily autonomy, privacy, independent thought, and moral dignity against coercive tech and tyranny.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-silver-800/80 text-[10px] text-silver-500 uppercase">
+                            STATUS: ACTIVE MANDATE
+                        </div>
+                    </div>
+
+                    <!-- Pillar 3 -->
+                    <div class="bg-pitch-900 border border-silver-800 p-6 rounded-none relative group hover:border-silver-400 transition-all duration-300 flex flex-col justify-between">
+                        <div class="absolute top-4 right-4 text-3xl font-oswald font-black text-pitch-700 group-hover:text-silver-400 transition">03</div>
+                        <div>
+                            <div class="w-12 h-12 bg-pitch-800 border border-silver-500 text-white font-oswald font-black text-xl flex items-center justify-center mb-6">
+                                進
+                            </div>
+                            <div class="text-[10px] text-silver-400 uppercase tracking-widest mb-1">PILLAR III (PAG-USWAG)</div>
+                            <h3 class="font-oswald text-2xl font-bold text-white mb-3 uppercase">DEVELOP HUMANITY</h3>
+                            <p class="text-xs text-silver-400 leading-relaxed">
+                                Advancing human potential. Funding decentralized science, open education, sovereign health, and sustainable community ascension.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-silver-800/80 text-[10px] text-silver-500 uppercase">
+                            STATUS: ACTIVE MANDATE
+                        </div>
+                    </div>
+
+                    <!-- Pillar 4 -->
+                    <div class="bg-pitch-900 border border-silver-800 p-6 rounded-none relative group hover:border-silver-400 transition-all duration-300 flex flex-col justify-between">
+                        <div class="absolute top-4 right-4 text-3xl font-oswald font-black text-pitch-700 group-hover:text-silver-400 transition">04</div>
+                        <div>
+                            <div class="w-12 h-12 bg-white text-black font-oswald font-black text-xl flex items-center justify-center mb-6">
+                                龍
+                            </div>
+                            <div class="text-[10px] text-silver-400 uppercase tracking-widest mb-1">PILLAR IV (PAG-ATBANG)</div>
+                            <h3 class="font-oswald text-2xl font-bold text-white mb-3 uppercase">ERADICATE CORRUPTION</h3>
+                            <p class="text-xs text-silver-400 leading-relaxed">
+                                The Bakunawa strikes in the dark. Exposing predatory syndicates, financial vultures, and unseating entrenched corruption worldwide.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-silver-800/80 text-[10px] text-silver-500 uppercase">
+                            STATUS: ENFORCEMENT READY
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE MEMBERSHIP ID GENERATOR SECTION -->
+        <section id="identity-generator" class="py-20 px-4 md:px-12 bg-pitch-900 border-b border-silver-800 bg-halftone relative">
+            <div class="max-w-6xl mx-auto">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="font-mono text-xs text-silver-400 border border-silver-700 px-3 py-1 uppercase tracking-widest">
+                        GLOBAL RECRUITMENT PORTAL
+                    </span>
+                    <h2 class="font-oswald text-4xl sm:text-6xl font-bold uppercase tracking-tight text-white mt-4">
+                        CLAIM YOUR GINHAWA IDENTITY
+                    </h2>
+                    <p class="font-mono text-xs text-silver-400 mt-2">
+                        Select your track below. Generate an official encrypted digital credentials card registered into the Ginhawa Global Network ledger.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    
+                    <!-- Form Controls Column (Left) -->
+                    <div class="lg:col-span-5 bg-pitch-950 border-2 border-silver-700 p-6 sm:p-8 brutalist-shadow-white font-mono">
+                        <h3 class="text-xl font-oswald font-bold text-white uppercase mb-6 flex items-center space-x-2 border-b border-silver-800 pb-3">
+                            <i class="fa-solid fa-sliders text-silver-400 text-sm"></i>
+                            <span>Credential Parameters</span>
+                        </h3>
+
+                        <form id="idForm" onsubmit="event.preventDefault(); updateCardPreview();" class="space-y-5 text-xs">
+                            
+                            <!-- Full Name -->
+                            <div>
+                                <label class="block text-silver-300 font-bold uppercase mb-1">Full Legal / Operative Alias</label>
+                                <input type="text" id="inputName" value="VALERIUS DRAKE" placeholder="e.g. MARCUS VANCE" required oninput="updateCardPreview()" class="w-full bg-pitch-900 border border-silver-700 p-3 text-white focus:outline-none focus:border-white transition">
+                            </div>
+
+                            <!-- Membership Track / Tier -->
+                            <div>
+                                <label class="block text-silver-300 font-bold uppercase mb-1">Membership Track</label>
+                                <select id="inputTrack" onchange="updateCardPreview()" class="w-full bg-pitch-900 border border-silver-700 p-3 text-white focus:outline-none focus:border-white transition uppercase">
+                                    <option value="CITIZEN">Ginhawa Citizen (Protected Vanguard)</option>
+                                    <option value="OPERATIVE">Official Operative (Ginhawa Enforcer)</option>
+                                    <option value="GUARDIAN">High Guardian (Regional Council)</option>
+                                </select>
+                            </div>
+
+                            <!-- Region / Country -->
+                            <div>
+                                <label class="block text-silver-300 font-bold uppercase mb-1">Primary Jurisdiction / Region</label>
+                                <input type="text" id="inputRegion" value="SECTOR 07 // TOKYO-MANILA" placeholder="e.g. NORTH AMERICA - SECTOR 02" required oninput="updateCardPreview()" class="w-full bg-pitch-900 border border-silver-700 p-3 text-white focus:outline-none focus:border-white transition">
+                            </div>
+
+                            <!-- Designation Role -->
+                            <div>
+                                <label class="block text-silver-300 font-bold uppercase mb-1">Specialized Role / Function</label>
+                                <input type="text" id="inputRole" value="CYBER DEFENSE & LOGISTICS" placeholder="e.g. MEDICAL RELIEF / ENFORCEMENT" required oninput="updateCardPreview()" class="w-full bg-pitch-900 border border-silver-700 p-3 text-white focus:outline-none focus:border-white transition">
+                            </div>
+
+                            <!-- Avatar Style Selector -->
+                            <div>
+                                <label class="block text-silver-300 font-bold uppercase mb-1">Insignia Avatar Symbol</label>
+                                <div class="grid grid-cols-4 gap-2">
+                                    <button type="button" onclick="selectInsignia('dragon')" class="p-2 border border-silver-700 bg-pitch-900 text-center hover:border-white text-white">
+                                        <i class="fa-solid fa-dragon text-lg"></i>
+                                    </button>
+                                    <button type="button" onclick="selectInsignia('shield')" class="p-2 border border-silver-700 bg-pitch-900 text-center hover:border-white text-white">
+                                        <i class="fa-solid fa-shield-cat text-lg"></i>
+                                    </button>
+                                    <button type="button" onclick="selectInsignia('eye')" class="p-2 border border-silver-700 bg-pitch-900 text-center hover:border-white text-white">
+                                        <i class="fa-solid fa-eye text-lg"></i>
+                                    </button>
+                                    <button type="button" onclick="selectInsignia('breath')" class="p-2 border border-silver-700 bg-pitch-900 text-center hover:border-white text-white">
+                                        <i class="fa-solid fa-wind text-lg"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Regenerate Serial Number CTA -->
+                            <div class="pt-2">
+                                <button type="button" onclick="regenerateSerial()" class="w-full bg-pitch-800 hover:bg-pitch-700 border border-silver-600 text-silver-200 py-2.5 font-bold uppercase tracking-wider transition flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-arrows-rotate"></i>
+                                    <span>Generate New Serial Code</span>
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <!-- Digital ID Card Display Area (Right) -->
+                    <div class="lg:col-span-7 flex flex-col items-center justify-center">
+                        
+                        <div class="text-xs font-mono text-silver-400 mb-3 flex items-center space-x-2">
+                            <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                            <span>LIVE HIGH-FIDELITY DIGITAL CREDENTIAL PREVIEW</span>
+                        </div>
+
+                        <!-- THE ID CARD CONTAINER -->
+                        <div id="idCardContainer" class="w-full max-w-md bg-pitch-950 border-2 border-white p-6 rounded-none shadow-2xl relative overflow-hidden holographic-shimmer brutalist-shadow-silver transition-all duration-300">
+                            
+                            <!-- Card Header Bar -->
+                            <div class="flex justify-between items-start border-b-2 border-white pb-4 mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-white text-black font-oswald font-black text-2xl flex items-center justify-center border border-black">
+                                        息
+                                    </div>
+                                    <div>
+                                        <div class="font-cinzel font-black text-base text-white tracking-wider leading-none">GINHAWA ORDER</div>
+                                        <div class="font-mono text-[9px] text-silver-400 tracking-widest mt-0.5">BAKUNAWA GLOBAL COVENANT</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span id="cardTrackBadge" class="bg-white text-black font-mono text-[9px] font-black px-2 py-1 uppercase tracking-wider border border-black">
+                                        CITIZEN
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Card Body Grid -->
+                            <div class="grid grid-cols-12 gap-4 my-4 font-mono">
+                                
+                                <!-- Insignia/Photo Box -->
+                                <div class="col-span-4 bg-pitch-900 border border-silver-600 p-3 flex flex-col items-center justify-center text-center relative">
+                                    <div id="cardInsigniaIcon" class="text-4xl text-silver-200 my-2">
+                                        <i class="fa-solid fa-dragon"></i>
+                                    </div>
+                                    <div class="text-[8px] text-silver-500 uppercase mt-2">CLEARANCE</div>
+                                    <div class="text-[10px] font-bold text-white uppercase" id="cardClearanceText">TIER 1</div>
+                                </div>
+
+                                <!-- Member Info Stack -->
+                                <div class="col-span-8 space-y-2 text-xs">
+                                    <div>
+                                        <div class="text-[9px] text-silver-500 uppercase">NAME / ALIAS</div>
+                                        <div id="cardNameDisplay" class="font-oswald text-xl font-bold text-white tracking-wide uppercase truncate">
+                                            VALERIUS DRAKE
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="text-[9px] text-silver-500 uppercase">ASSIGNED ROLE</div>
+                                        <div id="cardRoleDisplay" class="font-bold text-silver-200 text-[11px] truncate uppercase">
+                                            CYBER DEFENSE & LOGISTICS
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-2 pt-1 border-t border-silver-800">
+                                        <div>
+                                            <div class="text-[8px] text-silver-500 uppercase">JURISDICTION</div>
+                                            <div id="cardRegionDisplay" class="text-[9px] text-silver-300 font-bold truncate">
+                                                SECTOR 07
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="text-[8px] text-silver-500 uppercase">STATUS</div>
+                                            <div class="text-[9px] text-green-400 font-bold flex items-center space-x-1">
+                                                <i class="fa-solid fa-check text-[8px]"></i>
+                                                <span>VERIFIED</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Barcode & Serial Footer -->
+                            <div class="mt-6 pt-3 border-t-2 border-white flex justify-between items-end font-mono">
+                                <div>
+                                    <div class="text-[8px] text-silver-500 uppercase">REGISTRATION SERIAL NUMBER</div>
+                                    <div id="cardSerialDisplay" class="text-xs font-bold tracking-widest text-white">
+                                        GHW-9920-881X-2026
+                                    </div>
+                                </div>
+
+                                <!-- Custom Barcode Drawing -->
+                                <div class="flex items-end space-x-0.5 h-7 px-1 bg-white py-1">
+                                    <div class="w-1 h-full bg-black"></div>
+                                    <div class="w-0.5 h-full bg-black"></div>
+                                    <div class="w-1.5 h-full bg-black"></div>
+                                    <div class="w-0.5 h-full bg-black"></div>
+                                    <div class="w-1 h-full bg-black"></div>
+                                    <div class="w-2 h-full bg-black"></div>
+                                    <div class="w-0.5 h-full bg-black"></div>
+                                    <div class="w-1 h-full bg-black"></div>
+                                    <div class="w-1.5 h-full bg-black"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Card Download / Export Actions -->
+                        <div class="mt-6 flex flex-wrap gap-4 font-mono text-xs">
+                            <button onclick="downloadIdentityCard()" class="bg-white text-black font-bold px-6 py-3 uppercase tracking-wider hover:bg-silver-300 transition flex items-center space-x-2 shadow-lg">
+                                <i class="fa-solid fa-download"></i>
+                                <span>Export Credentials (JSON/PNG)</span>
+                            </button>
+                            <button onclick="copySerialToClipboard()" class="bg-pitch-950 border border-silver-600 text-silver-300 font-bold px-4 py-3 uppercase tracking-wider hover:border-white transition flex items-center space-x-2">
+                                <i class="fa-solid fa-copy"></i>
+                                <span>Copy Serial</span>
+                            </button>
+                        </div>
+                        <div id="copyNotice" class="text-[10px] font-mono text-green-400 mt-2 h-4"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- INTERACTIVE ENCRYPTED TERMINAL SECTION -->
+        <section id="terminal" class="py-20 px-4 md:px-12 bg-pitch-950 border-b border-silver-800 font-mono">
+            <div class="max-w-5xl mx-auto">
+                
+                <div class="flex items-center justify-between mb-4 border-b border-silver-800 pb-2">
+                    <div class="flex items-center space-x-2 text-xs">
+                        <span class="w-3 h-3 bg-red-600 rounded-full inline-block"></span>
+                        <span class="w-3 h-3 bg-yellow-500 rounded-full inline-block"></span>
+                        <span class="w-3 h-3 bg-green-500 rounded-full inline-block"></span>
+                        <span class="text-silver-400 font-bold ml-2">GINHAWA_SECURE_MAINFRAME_v8.4.1</span>
+                    </div>
+                    <div class="text-[10px] text-silver-500">ENCRYPTION: AES-256-BAKUNAWA</div>
+                </div>
+
+                <!-- Terminal Display Box -->
+                <div class="bg-black border-2 border-silver-700 p-6 brutalist-shadow-silver">
+                    <div id="terminalLog" class="h-64 overflow-y-auto space-y-2 text-xs text-silver-300 mb-4 pr-2">
+                        <div class="text-silver-500">=====================================================================</div>
+                        <div class="text-white font-bold">WELCOME TO THE GINHAWA COVENANT CENTRAL COMMAND NODE</div>
+                        <div class="text-silver-400">Type <span class="text-white underline">help</span> to view available system queries and directives.</div>
+                        <div class="text-silver-500">=====================================================================</div>
+                    </div>
+
+                    <!-- Input Bar -->
+                    <div class="flex items-center border-t border-silver-800 pt-3">
+                        <span class="text-silver-400 font-bold mr-2">></span>
+                        <input type="text" id="termInput" placeholder="enter command (e.g., help, manifesto, nodes, clear)..." onkeypress="handleTerminalCommand(event)" class="w-full bg-transparent text-white font-mono text-xs focus:outline-none">
+                        <button onclick="executeTermBtn()" class="bg-white text-black px-3 py-1 font-bold text-xs uppercase hover:bg-silver-300">
+                            EXECUTE
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="py-12 px-6 bg-pitch-950 font-mono text-xs text-silver-500 border-t border-silver-800">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+                
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-white text-black font-oswald font-black flex items-center justify-center text-lg">
+                        息
+                    </div>
+                    <div>
+                        <div class="font-cinzel font-bold text-white text-sm">GINHAWA GLOBAL ORDER</div>
+                        <div class="text-[10px]">PRESERVING HUMANITY • ERADICATING CORRUPTION</div>
+                    </div>
+                </div>
+
+                <div class="flex space-x-6 text-[11px]">
+                    <a href="#directives" class="hover:text-white transition">CHARTER</a>
+                    <a href="#identity-generator" class="hover:text-white transition">RECRUITMENT</a>
+                    <a href="#terminal" class="hover:text-white transition">MAINFRAME</a>
+                </div>
+
+                <div class="text-[10px] text-center md:text-right">
+                    © 2026 GINHAWA COVENANT. ALL RIGHTS RESERVED.<br>
+                    PROTECTED UNDER THE BAKUNAWA SOVEREIGN PACT.
+                </div>
+
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // --- SFX AUDIO ENGINE (Web Audio Synthesizer) ---
+        let audioActive = false;
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function toggleAudio() {
+            audioActive = !audioActive;
+            const status = document.getElementById('audioStatus');
+            const icon = document.getElementById('audioIcon');
+
+            if (audioActive) {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                status.innerText = "SFX ON";
+                status.className = "hidden sm:inline text-[10px] text-green-400";
+                icon.className = "fa-solid fa-volume-high text-green-400";
+                playSfx('click');
+            } else {
+                status.innerText = "SFX OFF";
+                status.className = "hidden sm:inline text-[10px] text-silver-400";
+                icon.className = "fa-solid fa-volume-xmark text-red-400";
+            }
+        }
+
+        function playSfx(type) {
+            if (!audioActive) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'click') {
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.04);
+                } else if (type === 'dragon') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(120, audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.3);
+                    gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.3);
+                }
+            } catch(e) {
+                console.log(e);
+            }
+        }
+
+        // --- ID CARD GENERATOR LOGIC ---
+        let currentInsignia = 'dragon';
+        let currentSerial = 'GHW-9920-881X-2026';
+
+        function selectInsignia(type) {
+            playSfx('click');
+            currentInsignia = type;
+            const iconBox = document.getElementById('cardInsigniaIcon');
+            if (type === 'dragon') iconBox.innerHTML = '<i class="fa-solid fa-dragon"></i>';
+            else if (type === 'shield') iconBox.innerHTML = '<i class="fa-solid fa-shield-cat"></i>';
+            else if (type === 'eye') iconBox.innerHTML = '<i class="fa-solid fa-eye"></i>';
+            else if (type === 'breath') iconBox.innerHTML = '<i class="fa-solid fa-wind"></i>';
+        }
+
+        function regenerateSerial() {
+            playSfx('click');
+            const rand = Math.floor(1000 + Math.random() * 9000);
+            const hex = Math.random().toString(16).substring(2, 6).toUpperCase();
+            currentSerial = `GHW-${rand}-${hex}-2026`;
+            document.getElementById('cardSerialDisplay').innerText = currentSerial;
+        }
+
+        function updateCardPreview() {
+            playSfx('click');
+            const name = document.getElementById('inputName').value.trim() || 'OPERATIVE ALIAS';
+            const track = document.getElementById('inputTrack').value;
+            const region = document.getElementById('inputRegion').value.trim() || 'GLOBAL SECTOR';
+            const role = document.getElementById('inputRole').value.trim() || 'MEMBER';
+
+            document.getElementById('cardNameDisplay').innerText = name;
+            document.getElementById('cardRoleDisplay').innerText = role;
+            document.getElementById('cardRegionDisplay').innerText = region;
+            document.getElementById('cardTrackBadge').innerText = track;
+
+            const clearanceText = document.getElementById('cardClearanceText');
+            if (track === 'CITIZEN') clearanceText.innerText = 'TIER 1';
+            else if (track === 'OPERATIVE') clearanceText.innerText = 'TIER 3';
+            else if (track === 'GUARDIAN') clearanceText.innerText = 'TIER 5 (MAX)';
+        }
+
+        function copySerialToClipboard() {
+            playSfx('click');
+            const serial = document.getElementById('cardSerialDisplay').innerText;
+            
+            // execCommand fallback
+            const dummy = document.createElement("input");
+            document.body.appendChild(dummy);
+            dummy.value = serial;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+
+            const notice = document.getElementById('copyNotice');
+            notice.innerText = `[ COPIED SERIAL "${serial}" TO CLIPBOARD ]`;
+            setTimeout(() => { notice.innerText = ''; }, 3000);
+        }
+
+        function downloadIdentityCard() {
+            playSfx('click');
+            const cardData = {
+                organization: "GINHAWA GLOBAL COVENANT",
+                name: document.getElementById('cardNameDisplay').innerText,
+                role: document.getElementById('cardRoleDisplay').innerText,
+                track: document.getElementById('cardTrackBadge').innerText,
+                region: document.getElementById('cardRegionDisplay').innerText,
+                serial: document.getElementById('cardSerialDisplay').innerText,
+                issued: new Date().toISOString()
+            };
+
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(cardData, null, 2));
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute("href", dataStr);
+            dlAnchor.setAttribute("download", `GINHAWA_CARD_${cardData.serial}.json`);
+            document.body.appendChild(dlAnchor);
+            dlAnchor.click();
+            dlAnchor.remove();
+        }
+
+        // --- ENCRYPTED TERMINAL LOGIC ---
+        function executeTermBtn() {
+            const input = document.getElementById('termInput');
+            processCommand(input.value);
+            input.value = '';
+        }
+
+        function handleTerminalCommand(e) {
+            if (e.key === 'Enter') {
+                const input = document.getElementById('termInput');
+                processCommand(input.value);
+                input.value = '';
+            }
+        }
+
+        function processCommand(cmdRaw) {
+            playSfx('click');
+            const cmd = cmdRaw.trim().toLowerCase();
+            const log = document.getElementById('terminalLog');
+
+            if (!cmd) return;
+
+            const uLine = document.createElement('div');
+            uLine.className = 'text-white font-bold';
+            uLine.innerText = `> ${cmdRaw}`;
+            log.appendChild(uLine);
+
+            const rLine = document.createElement('div');
+            rLine.className = 'text-silver-300 ml-2';
+
+            if (cmd === 'help') {
+                rLine.innerHTML = `AVAILABLE COMMANDS:<br>
+                - <span class="text-white">manifesto</span> : Read Ginhawa Anti-Corruption Charter<br>
+                - <span class="text-white">nodes</span> : View global active sectors<br>
+                - <span class="text-white">status</span> : System integrity diagnostic<br>
+                - <span class="text-white">clear</span> : Clear console window`;
+            } else if (cmd === 'manifesto') {
+                rLine.innerHTML = `<span class="text-silver-200 font-bold">[ GINHAWA CHARTER ]</span><br>We do not bow to predatory conglomerates or corrupt syndicates. Ginhawa preserves the vital breath of humanity through unyielding solidarity and decentralized resistance.`;
+            } else if (cmd === 'nodes') {
+                rLine.innerHTML = `ACTIVE COVENANT NODES:<br>
+                [01] SECTOR-MANILA (HEADQUARTERS)<br>
+                [02] SECTOR-TOKYO (LOGISTICS)<br>
+                [03] SECTOR-LONDON (FINANCIAL SURVEILLANCE)<br>
+                [04] SECTOR-VALLETTA (SANCTUARY HUB)`;
+            } else if (cmd === 'status') {
+                rLine.innerHTML = `<span class="text-green-400">MAINFRAME STATUS: 100% SECURE. BAKUNAWA SHIELD ENGAGED.</span>`;
+            } else if (cmd === 'clear') {
+                log.innerHTML = '';
+                return;
+            } else {
+                rLine.innerHTML = `<span class="text-red-400">Command not recognized "${cmd}". Type 'help' for instructions.</span>`;
+            }
+
+            log.appendChild(rLine);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        // --- AMBIENT SILVER PARTICLE CANVAS ---
+        function initCanvasParticles() {
+            const canvas = document.getElementById('particleCanvas');
+            const ctx = canvas.getContext('2d');
+
+            function resize() {
+                canvas.width = canvas.parentElement.clientWidth;
+                canvas.height = canvas.parentElement.clientHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            const particles = [];
+            for (let i = 0; i < 45; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    r: Math.random() * 1.8 + 0.5,
+                    vy: Math.random() * -0.4 - 0.1,
+                    vx: (Math.random() - 0.5) * 0.2,
+                    alpha: Math.random() * 0.6 + 0.2
+                });
+            }
+
+            function render() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(225, 225, 235, ${p.alpha})`;
+                    ctx.shadowBlur = 6;
+                    ctx.shadowColor = '#FFFFFF';
+                    ctx.fill();
+
+                    p.y += p.vy;
+                    p.x += p.vx;
+
+                    if (p.y < 0) {
+                        p.y = canvas.height;
+                        p.x = Math.random() * canvas.width;
+                    }
+                });
+                requestAnimationFrame(render);
+            }
+            render();
+        }
+
+        // --- INITIALIZATION ---
+        window.onload = function() {
+            initCanvasParticles();
+            updateCardPreview();
+        };
+    </script>
+</body>
+</html>

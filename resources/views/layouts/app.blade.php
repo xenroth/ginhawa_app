@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ $title ?? 'GINHAWA // Covenant Network' }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <script>tailwind.config={theme:{extend:{colors:{pitch:{950:'#030304',900:'#070708',800:'#0e0e10',700:'#18181c'},silver:{400:'#c0c0c0',500:'#a1a1a6',700:'#636366',800:'#3a3a3c'}},fontFamily:{mono:['Courier Prime','monospace'],oswald:['Oswald','sans-serif']}}}}</script>
+    <style>
+        body{background:#030304;color:#f5f5f7;font-family:'Courier Prime',monospace}.scanlines{background:linear-gradient(transparent 50%,rgba(0,0,0,.35) 50%);background-size:100% 4px;pointer-events:none}.chrome{background:linear-gradient(135deg,#fff,#707070,#eee,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}.foil{border:1px solid;border-image:linear-gradient(135deg,#fff,#636366,#eee,#18181c) 1}.hard{box-shadow:5px 5px 0 #c0c0c0}.btn{transition:.15s}.btn:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 #c0c0c0}.reveal{animation:reveal .5s ease both}@keyframes reveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    </style>
+</head>
+<body class="min-h-screen bg-pitch-950 selection:bg-silver-400 selection:text-black">
+<div class="fixed inset-0 scanlines opacity-25 z-50"></div>
+<header class="sticky top-0 z-40 border-b border-silver-800 bg-pitch-950/95 backdrop-blur px-4 md:px-8 py-3 flex items-center justify-between">
+    <a href="{{ route('home') }}" class="flex items-center gap-3"><span class="bg-white text-black px-2 py-1 font-oswald text-xl">息</span><span><strong class="tracking-[.25em]">GINHAWA</strong><small class="block text-[9px] text-silver-500">// DECENTRALIZED INTEL NETWORK</small></span></a>
+    <nav class="hidden md:flex gap-6 text-xs uppercase"><a href="{{ route('home') }}#directives" class="hover:text-white text-silver-400">Charter</a><a href="{{ route('forum') }}" class="hover:text-white text-silver-400">Forum</a>@auth @if(auth()->user()->hasAnyRole(['administrator','moderator']))<a href="{{ route('admin') }}" class="text-white">Admin</a>@endif @endauth</nav>
+    <div class="flex items-center gap-3 text-xs">@auth <span class="hidden sm:inline text-silver-400">{{ auth()->user()->name }}</span><form method="post" action="{{ route('logout') }}">@csrf<button class="border border-silver-700 px-3 py-1 hover:border-white">EXIT</button></form>@else<a href="{{ route('login') }}" class="text-silver-300 hover:text-white">LOGIN</a><a href="{{ route('register') }}" class="bg-white text-black px-3 py-1 font-bold">JOIN</a>@endauth</div>
+</header>
+@if(session('success'))<div class="mx-auto max-w-7xl px-4 pt-4"><div class="border border-green-400/50 bg-green-400/10 p-3 text-xs text-green-300">// {{ session('success') }}</div></div>@endif
+@if($errors->any())<div class="mx-auto max-w-7xl px-4 pt-4"><div class="border border-red-400/50 bg-red-400/10 p-3 text-xs text-red-300">{{ $errors->first() }}</div></div>@endif
+@yield('content')
+<footer class="border-t border-silver-800 px-6 py-10 text-center text-[10px] text-silver-600">GINHAWA COVENANT // AUTHOR: AKHZAROTH KHAN (RICHARD C. CUPAL, LPT)</footer>
+@stack('scripts')
+</body></html>

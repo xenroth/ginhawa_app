@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GINHAWA // COVENANT COMMUNITY & INTEL FORUM</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600;700;800;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        silver: {
+                            100: '#F5F5F7',
+                            200: '#E5E5EA',
+                            300: '#D1D1D6',
+                            400: '#C0C0C0', // Pure Silver
+                            500: '#A1A1A6',
+                            600: '#8E8E93',
+                            700: '#636366',
+                            800: '#3A3A3C',
+                            900: '#1C1C1E',
+                            chrome: '#E8E8E8'
+                        },
+                        pitch: {
+                            950: '#030304',
+                            900: '#070708',
+                            800: '#0E0E10',
+                            700: '#18181C',
+                            600: '#24242A'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        oswald: ['Oswald', 'sans-serif'],
+                        mono: ['Courier Prime', 'monospace'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #030304;
+            color: #F5F5F7;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Scanline Overlay Effect */
+        .scanline-bg {
+            background: linear-gradient(
+                rgba(255, 255, 255, 0) 50%, 
+                rgba(0, 0, 0, 0.45) 50%
+            ), linear-gradient(
+                90deg,
+                rgba(255, 0, 0, 0.02),
+                rgba(0, 255, 0, 0.01),
+                rgba(0, 0, 255, 0.02)
+            );
+            background-size: 100% 3px, 6px 100%;
+            pointer-events: none;
+        }
+
+        /* Metallic Chrome Text */
+        .text-chrome {
+            background: linear-gradient(135deg, #FFFFFF 0%, #C0C0C0 35%, #707070 50%, #E8E8E8 70%, #FFFFFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 0px 10px rgba(192, 192, 192, 0.3));
+        }
+
+        /* Metallic Silver Foil Borders */
+        .border-silver-foil {
+            border: 1px solid;
+            border-image: linear-gradient(135deg, #FFFFFF, #8E8E93, #E8E8E8, #3A3A3C) 1;
+        }
+
+        /* Hologram Shimmer Animation */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .holographic-shimmer {
+            background: linear-gradient(
+                115deg, 
+                rgba(255,255,255,0) 0%, 
+                rgba(255,255,255,0.05) 25%, 
+                rgba(192,192,192,0.2) 45%, 
+                rgba(255,255,255,0.3) 50%, 
+                rgba(192,192,192,0.2) 55%, 
+                rgba(255,255,255,0.05) 75%, 
+                rgba(255,255,255,0) 100%
+            );
+            background-size: 200% 100%;
+            animation: shimmer 8s infinite linear;
+        }
+
+        /* Brutalist Hard Shadows */
+        .brutalist-shadow-white {
+            box-shadow: 4px 4px 0px 0px #FFFFFF;
+        }
+        .brutalist-shadow-silver {
+            box-shadow: 4px 4px 0px 0px #C0C0C0;
+        }
+        .brutalist-shadow-dark {
+            box-shadow: 4px 4px 0px 0px #18181C;
+        }
+
+        .brutal-btn {
+            transition: all 0.15s ease;
+        }
+        .brutal-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px 0px #C0C0C0;
+        }
+
+        /* Halftone Dot Pattern */
+        .bg-halftone {
+            background-image: radial-gradient(#3A3A3C 15%, transparent 15%);
+            background-size: 10px 10px;
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030304;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3A3A3C;
+            border-radius: 1px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C0C0C0;
+        }
+
+        /* Glowing Badge Animation */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.8; filter: drop-shadow(0 0 4px #FFFFFF); }
+            50% { opacity: 1; filter: drop-shadow(0 0 10px #FFFFFF); }
+        }
+        .pulse-silver {
+            animation: pulseGlow 3s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-pitch-950 text-silver-100 antialiased selection:bg-silver-400 selection:text-black relative min-h-screen flex flex-col">
+
+    <div class="fixed inset-0 scanline-bg z-30 pointer-events-none opacity-30"></div>
+
+    <!-- TOP GLOBAL NAVBAR -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-pitch-950/95 backdrop-blur-md border-b border-silver-800 text-xs py-2.5 px-4 md:px-8 flex items-center justify-between">
+        
+        <!-- Brand & Logo -->
+        <div class="flex items-center space-x-4">
+            <a href="#" onclick="playSfx('click')" class="flex items-center space-x-3 group">
+                <div class="w-8 h-8 rounded-sm bg-white text-black font-black flex items-center justify-center font-oswald text-xl tracking-tighter border border-silver-400 group-hover:bg-silver-300 transition">
+                    息
+                </div>
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <span class="font-cinzel font-black tracking-widest text-sm text-white">GINHAWA</span>
+                        <span class="bg-silver-800 text-silver-300 px-1.5 py-0.5 text-[9px] font-mono tracking-wider border border-silver-700">COMMUNITY HUB</span>
+                    </div>
+                    <span class="text-[9px] font-mono text-silver-500 hidden sm:block">// DECENTRALIZED INTEL NETWORK</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Global Search Bar -->
+        <div class="hidden md:flex items-center flex-1 max-w-md mx-8 relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 text-silver-500 text-xs"></i>
+            <input type="text" id="globalSearchInput" onkeyup="filterThreads()" placeholder="Search intel transmissions, tags (#Whistleblower), or operatives..." class="w-full bg-pitch-900 border border-silver-800 text-silver-200 text-xs font-mono pl-9 pr-8 py-2 focus:outline-none focus:border-white transition">
+            <span class="absolute right-2.5 font-mono text-[9px] bg-pitch-800 text-silver-500 px-1.5 py-0.5 border border-silver-700">CTRL+K</span>
+        </div>
+
+        <!-- User Profile & Action Bar -->
+        <div class="flex items-center space-x-4 font-mono">
+            <!-- Audio Toggle -->
+            <button onclick="toggleAudio()" id="audioBtn" title="Toggle UI SFX" class="border border-silver-700 bg-pitch-900 px-2.5 py-1.5 rounded-none text-xs flex items-center space-x-1.5 hover:border-silver-400 transition">
+                <i class="fa-solid fa-volume-xmark text-red-400" id="audioIcon"></i>
+                <span id="audioStatus" class="hidden sm:inline text-[10px] text-silver-400">SFX OFF</span>
+            </button>
+
+            <!-- Notification Bell -->
+            <button onclick="openNotificationDrawer()" class="relative p-2 text-silver-300 hover:text-white transition">
+                <i class="fa-solid fa-bell text-sm"></i>
+                <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-white animate-ping"></span>
+                <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-white"></span>
+            </button>
+
+            <!-- Encrypted Messages -->
+            <button onclick="openWhistleblowerModal()" class="relative p-2 text-silver-300 hover:text-white transition" title="Encrypted Vault">
+                <i class="fa-solid fa-shield-halved text-sm"></i>
+            </button>
+
+            <!-- User ID Pill -->
+            <div class="hidden sm:flex items-center space-x-2 border-l border-silver-800 pl-4">
+                <div class="w-7 h-7 bg-pitch-900 border border-silver-500 flex items-center justify-center text-white text-xs font-bold font-oswald">
+                    <i class="fa-solid fa-dragon text-silver-300 text-xs"></i>
+                </div>
+                <div class="text-left text-[10px]">
+                    <div class="text-white font-bold leading-none flex items-center space-x-1">
+                        <span>OPERATIVE #0892</span>
+                        <i class="fa-solid fa-circle-check text-silver-400 text-[9px]" title="Cleared Member"></i>
+                    </div>
+                    <div class="text-silver-500 tracking-wider">CLEARANCE TIER 3</div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <!-- MAIN HUB LAYOUT (3-COLUMN GRID) -->
+    <div class="pt-16 flex-1 flex flex-col md:flex-row max-w-7xl w-full mx-auto px-2 sm:px-4 md:px-6 py-4 gap-6">
+
+        <!-- LEFT SIDEBAR: NAV & SECTORS -->
+        <aside class="w-full md:w-64 lg:w-72 flex-shrink-0 space-y-6">
+            
+            <!-- Quick New Post CTA -->
+            <button onclick="openNewThreadModal()" class="w-full bg-white text-black font-mono font-bold text-xs py-3 px-4 uppercase tracking-widest border-2 border-white brutalist-shadow-silver brutal-btn flex items-center justify-center space-x-2">
+                <i class="fa-solid fa-pen-nib"></i>
+                <span>NEW TRANSMISSION</span>
+            </button>
+
+            <!-- Sectors / Categories Menu -->
+            <div class="bg-pitch-900 border border-silver-800 p-4 font-mono">
+                <div class="text-[10px] text-silver-500 font-bold uppercase tracking-widest border-b border-silver-800 pb-2 mb-3 flex items-center justify-between">
+                    <span>// FORUM SECTORS</span>
+                    <i class="fa-solid fa-layer-group text-silver-600"></i>
+                </div>
+
+                <nav class="space-y-1 text-xs">
+                    <button onclick="filterCategory('ALL')" class="category-btn active w-full text-left px-3 py-2 text-white font-bold bg-pitch-800 border-l-2 border-white flex justify-between items-center transition">
+                        <span><i class="fa-solid fa-border-all mr-2 text-silver-400"></i>00. ALL SECTORS</span>
+                        <span class="text-[10px] bg-pitch-950 px-1.5 py-0.5 border border-silver-800 text-silver-400" id="countAll">5</span>
+                    </button>
+                    
+                    <button onclick="filterCategory('MANIFESTO')" class="category-btn w-full text-left px-3 py-2 text-silver-400 hover:text-white hover:bg-pitch-800 border-l-2 border-transparent flex justify-between items-center transition">
+                        <span class="truncate"><i class="fa-solid fa-bullhorn mr-2 text-silver-500"></i>01. MANIFESTO</span>
+                        <span class="text-[10px] bg-pitch-950 px-1.5 py-0.5 border border-silver-800 text-silver-500">1</span>
+                    </button>
+
+                    <button onclick="filterCategory('OPERATIVES')" class="category-btn w-full text-left px-3 py-2 text-silver-400 hover:text-white hover:bg-pitch-800 border-l-2 border-transparent flex justify-between items-center transition">
+                        <span class="truncate"><i class="fa-solid fa-dragon mr-2 text-silver-500"></i>02. FIELD OPERATIVES</span>
+                        <span class="text-[10px] bg-pitch-950 px-1.5 py-0.5 border border-silver-800 text-silver-500">1</span>
+                    </button>
+
+                    <button onclick="filterCategory('PRESERVATION')" class="category-btn w-full text-left px-3 py-2 text-silver-400 hover:text-white hover:bg-pitch-800 border-l-2 border-transparent flex justify-between items-center transition">
+                        <span class="truncate"><i class="fa-solid fa-heart-pulse mr-2 text-silver-500"></i>03. HUMAN PRESERVATION</span>
+                        <span class="text-[10px] bg-pitch-950 px-1.5 py-0.5 border border-silver-800 text-silver-500">1</span>
+                    </button>
+
+                    <button onclick="filterCategory('ARCHIVES')" class="category-btn w-full text-left px-3 py-2 text-silver-400 hover:text-white hover:bg-pitch-800 border-l-2 border-transparent flex justify-between items-center transition">
+                        <span class="truncate"><i class="fa-solid fa-vault mr-2 text-silver-500"></i>04. BLACK VAULT</span>
+                        <span class="text-[10px] bg-pitch-950 px-1.5 py-0.5 border border-silver-800 text-silver-500">1</span>
+                    </button>
+
+                    <button onclick="filterCategory('LOUNGE')" class="category-btn w-full text-left px-3 py-2 text-silver-400 hover:text-white hover:bg-pitch-800 border-l-2 border-transparent flex justify-between items-center transition">
+                        <span class="truncate"><i class="fa-solid fa-comments mr-2 text-silver-500"></i>05. INTEL LOUNGE</span>
+                        <span class="text-[10px] bg-pitch-950 px-1.5 py-0.5 border border-silver-800 text-silver-500">1</span>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Popular Tag Filter Grid -->
+            <div class="bg-pitch-900 border border-silver-800 p-4 font-mono">
+                <div class="text-[10px] text-silver-500 font-bold uppercase tracking-widest border-b border-silver-800 pb-2 mb-3">
+                    // INTEL TAG FILTERS
+                </div>
+                <div class="flex flex-wrap gap-1.5">
+                    <button onclick="filterTag('#Whistleblower')" class="tag-chip text-[10px] bg-pitch-950 text-silver-300 border border-silver-700 px-2 py-1 hover:border-white hover:text-white transition">
+                        #Whistleblower
+                    </button>
+                    <button onclick="filterTag('#EmergencyIntel')" class="tag-chip text-[10px] bg-pitch-950 text-silver-300 border border-silver-700 px-2 py-1 hover:border-white hover:text-white transition">
+                        #EmergencyIntel
+                    </button>
+                    <button onclick="filterTag('#TechDefense')" class="tag-chip text-[10px] bg-pitch-950 text-silver-300 border border-silver-700 px-2 py-1 hover:border-white hover:text-white transition">
+                        #TechDefense
+                    </button>
+                    <button onclick="filterTag('#GlobalOps')" class="tag-chip text-[10px] bg-pitch-950 text-silver-300 border border-silver-700 px-2 py-1 hover:border-white hover:text-white transition">
+                        #GlobalOps
+                    </button>
+                    <button onclick="filterTag('#VerifiedOnly')" class="tag-chip text-[10px] bg-pitch-950 text-silver-300 border border-silver-700 px-2 py-1 hover:border-white hover:text-white transition">
+                        #VerifiedOnly
+                    </button>
+                </div>
+            </div>
+
+            <!-- Live Organization Metrics Widget -->
+            <div class="bg-pitch-900 border border-silver-800 p-4 font-mono border-silver-foil">
+                <div class="text-[10px] text-silver-400 font-bold uppercase tracking-widest mb-3 flex items-center space-x-2">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    <span>BAKUNAWA NETWORK STATUS</span>
+                </div>
+                <div class="space-y-3 text-xs">
+                    <div class="flex justify-between items-center border-b border-silver-800/80 pb-2">
+                        <span class="text-silver-500">OPERATIVES ONLINE</span>
+                        <span class="font-bold font-oswald text-white text-sm" id="statOnlineCount">1,409</span>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-silver-800/80 pb-2">
+                        <span class="text-silver-500">CLEARED THREADS</span>
+                        <span class="font-bold font-oswald text-white text-sm">8,921</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-silver-500">THREATS NEUTRALIZED</span>
+                        <span class="font-bold font-oswald text-silver-300 text-sm">412</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Whistleblower Direct Vault Widget -->
+            <div class="bg-pitch-950 border-2 border-silver-700 p-4 font-mono brutalist-shadow-silver">
+                <div class="flex items-center space-x-2 text-white font-bold text-xs mb-2">
+                    <i class="fa-solid fa-user-secret text-silver-400"></i>
+                    <span>WHISTLEBLOWER VAULT</span>
+                </div>
+                <p class="text-[11px] text-silver-400 mb-3 leading-relaxed">
+                    Have verified evidence of systemic corruption? Submit zero-knowledge encrypted drops directly to council enforcers.
+                </p>
+                <button onclick="openWhistleblowerModal()" class="w-full bg-pitch-800 hover:bg-pitch-700 border border-silver-500 text-white font-bold text-[10px] py-2 uppercase tracking-wider transition">
+                    Encrypt & Upload Evidence
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- CENTER MAIN FEED -->
+        <main class="flex-1 min-w-0 space-y-4 font-mono">
+            
+            <!-- Feed Control Bar & Tabs -->
+            <div class="bg-pitch-900 border border-silver-800 p-3 flex flex-wrap items-center justify-between gap-3">
+                
+                <!-- Feed Filter Tabs -->
+                <div class="flex items-center space-x-1 text-xs">
+                    <button onclick="switchFeedTab('directives')" id="tab-directives" class="feed-tab bg-white text-black font-bold px-3 py-1.5 uppercase tracking-wider border border-white transition">
+                        <i class="fa-solid fa-thumbtack mr-1"></i> Directives
+                    </button>
+                    <button onclick="switchFeedTab('latest')" id="tab-latest" class="feed-tab bg-pitch-950 text-silver-400 font-bold px-3 py-1.5 uppercase tracking-wider border border-silver-800 hover:border-silver-500 transition">
+                        Latest
+                    </button>
+                    <button onclick="switchFeedTab('priority')" id="tab-priority" class="feed-tab bg-pitch-950 text-silver-400 font-bold px-3 py-1.5 uppercase tracking-wider border border-silver-800 hover:border-silver-500 transition">
+                        High Priority
+                    </button>
+                </div>
+
+                <!-- Sort & View Controls -->
+                <div class="flex items-center space-x-2 text-xs">
+                    <span class="text-silver-500 text-[10px] hidden sm:inline">SORT:</span>
+                    <select id="sortSelect" onchange="sortThreads()" class="bg-pitch-950 border border-silver-800 text-silver-300 px-2 py-1 text-xs focus:outline-none focus:border-white">
+                        <option value="newest">NEWEST FIRST</option>
+                        <option value="endorsements">MOST ENDORSED</option>
+                        <option value="replies">MOST ACTIVE</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- Active Tag / Search Clear Banner (Hidden by default) -->
+            <div id="filterBanner" class="hidden bg-pitch-900 border border-silver-600 px-4 py-2 flex justify-between items-center text-xs">
+                <div>
+                    <span class="text-silver-500">FILTERED BY:</span>
+                    <span id="filterBannerValue" class="text-white font-bold ml-2">#Whistleblower</span>
+                </div>
+                <button onclick="clearAllFilters()" class="text-silver-400 hover:text-white underline text-[10px]">
+                    CLEAR FILTERS
+                </button>
+            </div>
+
+            <!-- THREAD CARDS FEED CONTAINER -->
+            <div id="threadFeedContainer" class="space-y-4">
+                <!-- Thread Items Will Be Rendered Dynamically via JS -->
+            </div>
+
+        </main>
+
+        <!-- RIGHT SIDEBAR: COMMUNITY INTEL & TOP OPERATIVES -->
+        <aside class="w-full lg:w-80 flex-shrink-0 space-y-6 hidden lg:block font-mono">
+            
+            <!-- Council Directive Banner -->
+            <div class="bg-pitch-950 border-2 border-white p-5 brutalist-shadow-silver relative overflow-hidden holographic-shimmer">
+                <div class="text-[9px] text-silver-400 uppercase tracking-widest font-bold mb-1">// BAKUNAWA COUNCIL DIRECTIVE</div>
+                <h3 class="font-oswald text-xl font-bold text-white uppercase leading-tight mb-2">
+                    OPERATION: OXYGEN PURGE ACTIVE
+                </h3>
+                <p class="text-xs text-silver-300 leading-relaxed mb-4">
+                    All Sector Operatives are instructed to monitor deep-web financial pipelines for offshore human exploitation networks.
+                </p>
+                <div class="flex items-center justify-between text-[10px] text-silver-500 border-t border-silver-800 pt-2">
+                    <span>SECTOR CLEARANCE 04</span>
+                    <span class="text-white font-bold">24 HOURS REMAINING</span>
+                </div>
+            </div>
+
+            <!-- Top Endorsed Operatives / Leaderboard -->
+            <div class="bg-pitch-900 border border-silver-800 p-4">
+                <div class="text-[10px] text-silver-500 font-bold uppercase tracking-widest border-b border-silver-800 pb-2 mb-3 flex justify-between items-center">
+                    <span>// TOP INTEL PROVIDERS</span>
+                    <i class="fa-solid fa-award text-silver-400"></i>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2.5">
+                            <div class="w-7 h-7 bg-white text-black font-black font-oswald text-xs flex items-center justify-center">1</div>
+                            <div>
+                                <div class="text-xs text-white font-bold flex items-center space-x-1">
+                                    <span>GHOST_KITSUNE</span>
+                                    <i class="fa-solid fa-certificate text-silver-300 text-[9px]"></i>
+                                </div>
+                                <div class="text-[9px] text-silver-500">EXECUTIVE ENFORCER</div>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-silver-300">4,820 EXP</span>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2.5">
+                            <div class="w-7 h-7 bg-pitch-800 border border-silver-600 text-silver-300 font-oswald text-xs flex items-center justify-center">2</div>
+                            <div>
+                                <div class="text-xs text-silver-200 font-bold">SILVER_NAGA</div>
+                                <div class="text-[9px] text-silver-500">CYBER ANALYST</div>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-silver-400">3,110 EXP</span>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2.5">
+                            <div class="w-7 h-7 bg-pitch-800 border border-silver-700 text-silver-500 font-oswald text-xs flex items-center justify-center">3</div>
+                            <div>
+                                <div class="text-xs text-silver-300 font-bold">KAI_BAKUNAWA</div>
+                                <div class="text-[9px] text-silver-500">SECTOR GUARDIAN</div>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-silver-500">2,490 EXP</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community Rules / Covenant Oath -->
+            <div class="bg-pitch-900 border border-silver-800 p-4 text-xs space-y-2">
+                <div class="text-[10px] text-silver-500 font-bold uppercase tracking-widest border-b border-silver-800 pb-2 mb-2">
+                    // THE COVENANT RULES
+                </div>
+                <div class="text-[11px] text-silver-400 space-y-1.5 leading-normal">
+                    <p>• <strong>01. Zero Corruption:</strong> Do not compromise the safety or identity of fellow members.</p>
+                    <p>• <strong>02. Verifiable Intel:</strong> Back all claims with encrypted proof or source archives.</p>
+                    <p>• <strong>03. Preserve Life:</strong> All actions must serve human preservation.</p>
+                </div>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- MODAL 1: THREAD DETAIL & COMMENT READER MODAL -->
+    <div id="threadDetailModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+        <div class="bg-pitch-950 border-2 border-white w-full max-w-3xl my-8 p-4 sm:p-6 font-mono brutalist-shadow-silver relative">
+            
+            <!-- Close Modal Button -->
+            <button onclick="closeThreadModal()" class="absolute top-4 right-4 bg-white text-black font-bold w-8 h-8 flex items-center justify-center hover:bg-silver-300 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Modal Header Meta -->
+            <div class="flex items-center space-x-2 text-[10px] text-silver-400 mb-3 border-b border-silver-800 pb-3">
+                <span id="modalCategoryBadge" class="bg-white text-black font-bold px-2 py-0.5 uppercase">SECTOR 01</span>
+                <span id="modalClearanceBadge" class="border border-silver-600 px-2 py-0.5 uppercase text-silver-300">CLEARANCE: TIER 2</span>
+                <span>• POSTED <span id="modalTime">2 HOURS AGO</span></span>
+            </div>
+
+            <!-- Thread Title -->
+            <h2 id="modalTitle" class="font-oswald text-2xl sm:text-3xl font-bold text-white uppercase leading-tight mb-4">
+                THREAD TITLE HERE
+            </h2>
+
+            <!-- Author Header Block -->
+            <div class="flex items-center justify-between bg-pitch-900 border border-silver-800 p-3 mb-6">
+                <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 bg-pitch-800 border border-silver-500 text-white font-bold flex items-center justify-center font-oswald text-sm">
+                        <i id="modalAuthorIcon" class="fa-solid fa-user-secret"></i>
+                    </div>
+                    <div>
+                        <div id="modalAuthorName" class="text-xs font-bold text-white flex items-center space-x-1">
+                            <span>OPERATIVE NAME</span>
+                        </div>
+                        <div id="modalAuthorRole" class="text-[10px] text-silver-500">COMMUNITY ROLE</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2">
+                    <button onclick="endorseActiveThread()" id="modalEndorseBtn" class="bg-pitch-950 border border-silver-600 text-silver-200 text-xs px-3 py-1.5 font-bold hover:border-white transition flex items-center space-x-1">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <span id="modalEndorseCount">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Full Thread Body Content -->
+            <div id="modalBody" class="text-xs text-silver-200 leading-relaxed mb-6 space-y-3 bg-pitch-900/50 p-4 border-l-2 border-silver-400">
+                <!-- Thread body injected via JS -->
+            </div>
+
+            <!-- Comments Section Header -->
+            <div class="border-t border-silver-800 pt-6 mb-4 flex justify-between items-center">
+                <h3 class="text-sm font-bold text-white uppercase flex items-center space-x-2">
+                    <i class="fa-solid fa-comments text-silver-400"></i>
+                    <span>DISCUSSION LOGS (<span id="modalCommentCount">0</span>)</span>
+                </h3>
+            </div>
+
+            <!-- Comment List Container -->
+            <div id="modalCommentsContainer" class="space-y-3 max-h-60 overflow-y-auto pr-2 mb-6">
+                <!-- Comments injected via JS -->
+            </div>
+
+            <!-- Add Comment Form -->
+            <div class="border-t border-silver-800 pt-4">
+                <div class="text-[10px] text-silver-400 font-bold uppercase mb-2">// TRANSMIT REPLY TO LOG</div>
+                <div class="flex gap-2">
+                    <textarea id="replyInput" rows="2" placeholder="Write your encrypted reply..." class="w-full bg-pitch-900 border border-silver-700 text-xs text-white p-2.5 focus:outline-none focus:border-white transition"></textarea>
+                    <button onclick="submitReply()" class="bg-white text-black font-bold px-4 text-xs uppercase tracking-wider hover:bg-silver-300 transition flex items-center justify-center flex-shrink-0">
+                        POST
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODAL 2: CREATE NEW TRANSMISSION MODAL -->
+    <div id="newThreadModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+        <div class="bg-pitch-950 border-2 border-white w-full max-w-2xl my-8 p-6 font-mono brutalist-shadow-white relative">
+            
+            <button onclick="closeNewThreadModal()" class="absolute top-4 right-4 bg-white text-black font-bold w-8 h-8 flex items-center justify-center hover:bg-silver-300 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="border-b border-silver-800 pb-3 mb-6">
+                <span class="text-[10px] text-silver-400 uppercase tracking-widest">// NEW TRANSMISSION</span>
+                <h2 class="font-oswald text-2xl font-bold text-white uppercase">CREATE INTEL THREAD</h2>
+            </div>
+
+            <form onsubmit="event.preventDefault(); submitNewThread();" class="space-y-4 text-xs">
+                <div>
+                    <label class="block text-silver-300 font-bold uppercase mb-1">Transmission Title</label>
+                    <input type="text" id="newTitle" placeholder="e.g. [INTEL DROP] Unchecked corporate data harvesting in Sector 4" required class="w-full bg-pitch-900 border border-silver-700 p-2.5 text-white focus:outline-none focus:border-white transition">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-silver-300 font-bold uppercase mb-1">Forum Sector Category</label>
+                        <select id="newCategory" class="w-full bg-pitch-900 border border-silver-700 p-2.5 text-white focus:outline-none focus:border-white uppercase">
+                            <option value="MANIFESTO">01 // MANIFESTO & ANNOUNCEMENTS</option>
+                            <option value="OPERATIVES">02 // FIELD OPERATIVES</option>
+                            <option value="PRESERVATION">03 // HUMAN PRESERVATION</option>
+                            <option value="ARCHIVES">04 // BLACK VAULT</option>
+                            <option value="LOUNGE" selected>05 // INTEL LOUNGE</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-silver-300 font-bold uppercase mb-1">Required Clearance Tier</label>
+                        <select id="newClearance" class="w-full bg-pitch-900 border border-silver-700 p-2.5 text-white focus:outline-none focus:border-white uppercase">
+                            <option value="PUBLIC CITIZEN">PUBLIC CITIZEN (OPEN)</option>
+                            <option value="TIER 2 MEMBER">TIER 2 MEMBER</option>
+                            <option value="TIER 3 ENFORCER">TIER 3 ENFORCER</option>
+                            <option value="CIPHER CLEARANCE">CIPHER CLEARANCE (HIGH)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-silver-300 font-bold uppercase mb-1">Tags (Comma Separated)</label>
+                    <input type="text" id="newTags" placeholder="e.g. #Whistleblower, #TechDefense" class="w-full bg-pitch-900 border border-silver-700 p-2.5 text-white focus:outline-none focus:border-white transition">
+                </div>
+
+                <div>
+                    <label class="block text-silver-300 font-bold uppercase mb-1">Transmission Content Body</label>
+                    <textarea id="newBody" rows="6" placeholder="Provide verifiable details, links, or encrypted evidence..." required class="w-full bg-pitch-900 border border-silver-700 p-3 text-white focus:outline-none focus:border-white transition"></textarea>
+                </div>
+
+                <div class="pt-2 flex justify-end space-x-3">
+                    <button type="button" onclick="closeNewThreadModal()" class="px-5 py-2.5 border border-silver-700 text-silver-400 hover:text-white transition">
+                        CANCEL
+                    </button>
+                    <button type="submit" class="bg-white text-black font-bold px-6 py-2.5 uppercase tracking-wider hover:bg-silver-300 transition">
+                        TRANSMIT THREAD
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- MODAL 3: WHISTLEBLOWER ENCRYPTED VAULT MODAL -->
+    <div id="whistleblowerModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-2 sm:p-4">
+        <div class="bg-pitch-950 border-2 border-silver-400 w-full max-w-lg p-6 font-mono brutalist-shadow-white relative">
+            <button onclick="closeWhistleblowerModal()" class="absolute top-4 right-4 bg-white text-black font-bold w-8 h-8 flex items-center justify-center hover:bg-silver-300">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-white text-black font-black font-oswald text-2xl flex items-center justify-center mx-auto mb-2">
+                    <i class="fa-solid fa-vault"></i>
+                </div>
+                <h2 class="font-oswald text-2xl font-bold text-white uppercase">WHISTLEBLOWER CRYPT</h2>
+                <div class="text-[10px] text-silver-400">AES-256 ZERO-KNOWLEDGE EVIDENCE DROP</div>
+            </div>
+
+            <div class="space-y-4 text-xs">
+                <div>
+                    <label class="block text-silver-300 font-bold uppercase mb-1">Select Target Entity / Corruption Node</label>
+                    <input type="text" placeholder="e.g. Sector 09 Offshore Financial Syndicate" class="w-full bg-pitch-900 border border-silver-700 p-2.5 text-white focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-silver-300 font-bold uppercase mb-1">Upload Leaked Documents / Logs</label>
+                    <div class="border-2 border-dashed border-silver-700 p-6 text-center bg-pitch-900 cursor-pointer hover:border-white transition" onclick="simUpload()">
+                        <i class="fa-solid fa-cloud-arrow-up text-2xl text-silver-400 mb-2"></i>
+                        <div class="text-silver-300 font-bold text-xs" id="uploadStatusText">CLICK TO SELECT FILES OR DROP DATA LOGS</div>
+                        <div class="text-[9px] text-silver-500 mt-1">IP & Metadata automatically stripped</div>
+                    </div>
+                </div>
+
+                <button onclick="submitEncryptedDrop()" class="w-full bg-white text-black font-black py-3 uppercase tracking-widest hover:bg-silver-300 transition">
+                    LOCK & TRANSMIT TO COUNCIL
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- AUDIO ENGINE (Web Audio API Synthesizer) ---
+        let audioActive = false;
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function toggleAudio() {
+            audioActive = !audioActive;
+            const status = document.getElementById('audioStatus');
+            const icon = document.getElementById('audioIcon');
+
+            if (audioActive) {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                status.innerText = "SFX ON";
+                status.className = "hidden sm:inline text-[10px] text-green-400";
+                icon.className = "fa-solid fa-volume-high text-green-400";
+                playSfx('click');
+            } else {
+                status.innerText = "SFX OFF";
+                status.className = "hidden sm:inline text-[10px] text-silver-400";
+                icon.className = "fa-solid fa-volume-xmark text-red-400";
+            }
+        }
+
+        function playSfx(type) {
+            if (!audioActive) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'click') {
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(700, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.04);
+                } else if (type === 'post') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.15);
+                    gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.15);
+                }
+            } catch(e) {
+                console.log(e);
+            }
+        }
+
+        // --- SAMPLE INITIAL FORUM THREADS STATE ---
+        let forumThreads = [
+            {
+                id: 1,
+                title: "[DIRECTIVE #001] The Charter of Human Preservation & Anti-Corruption Protocol",
+                category: "MANIFESTO",
+                clearance: "PUBLIC CITIZEN",
+                author: "BAKUNAWA COUNCIL",
+                role: "Founding Order",
+                authorIcon: "fa-dragon",
+                time: "1 DAY AGO",
+                timestamp: 1000,
+                excerpt: "Ginhawa stands as the unyielding shield against human exploitation and predatory syndicates. Review our non-negotiable rules for all regional operatives.",
+                body: "Ginhawa stands as the unyielding shield against human exploitation and predatory syndicates. Every member is bound to defend human dignity, preserve physical sanctuary, and strike against financial corruption.\n\nAll operatives are granted full autonomy to investigate local human trafficking rings, predatory AI surveillance networks, and corporate extortion.",
+                tags: ["#Manifesto", "#VerifiedOnly"],
+                endorsements: 342,
+                endorsedByUser: false,
+                pinned: true,
+                comments: [
+                    { author: "OPERATIVE #0102", role: "Enforcer", text: "Loyal to the breath. Standing ready in Sector 07.", time: "18 HOURS AGO" },
+                    { author: "KAI_BAKUNAWA", role: "Guardian", text: "Manila underground nodes synced with the central vault.", time: "12 HOURS AGO" }
+                ]
+            },
+            {
+                id: 2,
+                title: "Exposing Deep-Web Human Trafficking Pipeline in Southeast Asia",
+                category: "ARCHIVES",
+                clearance: "CIPHER CLEARANCE",
+                author: "GHOST_KITSUNE",
+                role: "Executive Enforcer",
+                authorIcon: "fa-user-ninja",
+                time: "3 HOURS AGO",
+                timestamp: 2000,
+                excerpt: "Encrypted financial logs obtained from offshore shell corporations operating out of Manila and Bangkok. Whistleblower documents attached.",
+                body: "We have intercepted 4,000 pages of unredacted transaction logs linking major offshore holding companies to forced labor camps. The funds are routed through decentralized mixers.\n\nAction required: Technical operatives are requested to initiate forensic tracing on the listed wallet addresses.",
+                tags: ["#Whistleblower", "#EmergencyIntel"],
+                endorsements: 189,
+                endorsedByUser: false,
+                pinned: false,
+                comments: [
+                    { author: "SILVER_NAGA", role: "Cyber Analyst", text: "Tracing wallet 0x88f... Blockchain trail leads directly to a Panama holding firm.", time: "2 HOURS AGO" }
+                ]
+            },
+            {
+                id: 3,
+                title: "Decentralized Medical Supply Vaults: Open Source Blueprint Release",
+                category: "PRESERVATION",
+                clearance: "PUBLIC CITIZEN",
+                author: "DR_HEX_MED",
+                role: "Medical Logistics Lead",
+                authorIcon: "fa-laptop-code",
+                time: "5 HOURS AGO",
+                timestamp: 1800,
+                excerpt: "To retain humanity, communities must own their medical supply chains. Releasing hardware CAD files for low-cost oxygen concentrators.",
+                body: "Corrupt pharmaceutical monopolies continue to inflate essential life-saving gear prices. Today, the Ginhawa Medical Cell releases complete CAD blueprints for solar-powered modular oxygen generators.",
+                tags: ["#TechDefense", "#GlobalOps"],
+                endorsements: 124,
+                endorsedByUser: false,
+                pinned: false,
+                comments: []
+            },
+            {
+                id: 4,
+                title: "Sector 02 Tokyo Underground Gathering & Relay Point Established",
+                category: "OPERATIVES",
+                clearance: "TIER 2 MEMBER",
+                author: "KAZUMA_ZERO",
+                role: "Tokyo Node Lead",
+                authorIcon: "fa-mask",
+                time: "8 HOURS AGO",
+                timestamp: 1500,
+                excerpt: "Safehaven established in Shinjuku district. Encrypted mesh Wi-Fi relays online for operatives seeking untracked communications.",
+                body: "Operatives traveling through Sector 02 can now access our physically hardened safehaven. Frequency relays use short-range laser line-of-sight optics to bypass network interception.",
+                tags: ["#GlobalOps"],
+                endorsements: 95,
+                endorsedByUser: false,
+                pinned: false,
+                comments: []
+            },
+            {
+                id: 5,
+                title: "Retro Cyberpunk Sound Archives & Dark Ambient Beats for Long Ops",
+                category: "LOUNGE",
+                clearance: "PUBLIC CITIZEN",
+                author: "NEO_BEATS",
+                role: "Sound Curator",
+                authorIcon: "fa-music",
+                time: "12 HOURS AGO",
+                timestamp: 1200,
+                excerpt: "A curated list of high-tempo synthwave and dark ambient tracks for nocturnal coding and reconnaissance shifts.",
+                body: "Stay focused during night watch. Sharing our internal audio vault frequency mixes.",
+                tags: ["#Lounge"],
+                endorsements: 67,
+                endorsedByUser: false,
+                pinned: false,
+                comments: []
+            }
+        ];
+
+        let activeTab = 'directives';
+        let activeCategory = 'ALL';
+        let activeTagFilter = null;
+        let activeModalThreadId = null;
+
+        function renderThreads() {
+            const container = document.getElementById('threadFeedContainer');
+            const searchVal = document.getElementById('globalSearchInput').value.toLowerCase().trim();
+            container.innerHTML = '';
+
+            let filtered = forumThreads.filter(t => {
+                // Tab filtering
+                if (activeTab === 'directives' && !t.pinned && t.category !== 'MANIFESTO') return false;
+                if (activeTab === 'priority' && t.endorsements < 100) return false;
+
+                // Category filtering
+                if (activeCategory !== 'ALL' && t.category !== activeCategory) return false;
+
+                // Tag filtering
+                if (activeTagFilter && !t.tags.includes(activeTagFilter)) return false;
+
+                // Search filtering
+                if (searchVal) {
+                    const titleMatch = t.title.toLowerCase().includes(searchVal);
+                    const authorMatch = t.author.toLowerCase().includes(searchVal);
+                    const tagMatch = t.tags.some(tag => tag.toLowerCase().includes(searchVal));
+                    if (!titleMatch && !authorMatch && !tagMatch) return false;
+                }
+
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="bg-pitch-900 border border-silver-800 p-8 text-center font-mono">
+                        <i class="fa-solid fa-ghost text-3xl text-silver-600 mb-3"></i>
+                        <div class="text-white font-bold text-sm">NO TRANSMISSIONS FOUND</div>
+                        <div class="text-xs text-silver-500 mt-1">Adjust search parameters or clear active tag filters.</div>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(thread => {
+                const card = document.createElement('div');
+                card.className = `bg-pitch-900 border ${thread.pinned ? 'border-2 border-white' : 'border-silver-800'} p-4 sm:p-5 hover:border-silver-400 transition-all duration-200 relative group brutalist-shadow-dark`;
+                
+                card.innerHTML = `
+                    <!-- Header Badges -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3 text-[10px]">
+                        <div class="flex items-center space-x-2">
+                            ${thread.pinned ? '<span class="bg-white text-black font-bold px-2 py-0.5 uppercase flex items-center space-x-1"><i class="fa-solid fa-thumbtack text-[9px]"></i> <span>PINNED DIRECTIVE</span></span>' : ''}
+                            <span class="bg-pitch-950 text-silver-300 font-bold px-2 py-0.5 border border-silver-700 uppercase">[SECTOR // ${thread.category}]</span>
+                            <span class="text-silver-500 border border-silver-800 px-2 py-0.5 uppercase">${thread.clearance}</span>
+                        </div>
+                        <div class="text-silver-500">
+                            <i class="fa-regular fa-clock mr-1"></i>${thread.time}
+                        </div>
+                    </div>
+
+                    <!-- Thread Title -->
+                    <h3 onclick="openThreadModal(${thread.id})" class="font-oswald text-xl sm:text-2xl font-bold text-white uppercase group-hover:text-silver-300 transition cursor-pointer leading-snug mb-2">
+                        ${thread.title}
+                    </h3>
+
+                    <!-- Author Info -->
+                    <div class="flex items-center space-x-2 text-xs mb-3">
+                        <div class="w-5 h-5 bg-pitch-800 border border-silver-600 flex items-center justify-center text-white text-[10px]">
+                            <i class="fa-solid ${thread.authorIcon}"></i>
+                        </div>
+                        <span class="text-white font-bold">${thread.author}</span>
+                        <span class="text-[10px] text-silver-500">(${thread.role})</span>
+                    </div>
+
+                    <!-- Excerpt -->
+                    <p class="text-xs text-silver-400 leading-relaxed mb-4 line-clamp-2">
+                        ${thread.excerpt}
+                    </p>
+
+                    <!-- Tags & Action Bar -->
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-silver-800/80 text-xs">
+                        <div class="flex flex-wrap gap-1">
+                            ${thread.tags.map(tag => `<span onclick="filterTag('${tag}')" class="text-[9px] text-silver-400 bg-pitch-950 border border-silver-800 px-1.5 py-0.5 cursor-pointer hover:border-white transition">${tag}</span>`).join('')}
+                        </div>
+
+                        <div class="flex items-center space-x-4">
+                            <!-- Endorse / Upvote -->
+                            <button onclick="toggleEndorse(event, ${thread.id})" class="flex items-center space-x-1.5 ${thread.endorsedByUser ? 'text-white font-bold' : 'text-silver-400'} hover:text-white transition">
+                                <i class="fa-solid fa-arrow-up"></i>
+                                <span>${thread.endorsements}</span>
+                            </button>
+
+                            <!-- Replies Count -->
+                            <button onclick="openThreadModal(${thread.id})" class="flex items-center space-x-1.5 text-silver-400 hover:text-white transition">
+                                <i class="fa-solid fa-message"></i>
+                                <span>${thread.comments.length}</span>
+                            </button>
+
+                            <!-- View Thread Button -->
+                            <button onclick="openThreadModal(${thread.id})" class="bg-pitch-950 border border-silver-700 hover:border-white text-white px-3 py-1 text-[10px] uppercase tracking-wider transition">
+                                Read Intel
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function openThreadModal(threadId) {
+            playSfx('click');
+            const thread = forumThreads.find(t => t.id === threadId);
+            if (!thread) return;
+
+            activeModalThreadId = threadId;
+
+            document.getElementById('modalTitle').innerText = thread.title;
+            document.getElementById('modalCategoryBadge').innerText = `SECTOR // ${thread.category}`;
+            document.getElementById('modalClearanceBadge').innerText = `CLEARANCE: ${thread.clearance}`;
+            document.getElementById('modalTime').innerText = thread.time;
+            document.getElementById('modalAuthorName').innerText = thread.author;
+            document.getElementById('modalAuthorRole').innerText = thread.role;
+            document.getElementById('modalAuthorIcon').className = `fa-solid ${thread.authorIcon}`;
+            document.getElementById('modalBody').innerText = thread.body;
+            document.getElementById('modalEndorseCount').innerText = thread.endorsements;
+
+            const modalBtn = document.getElementById('modalEndorseBtn');
+            if (thread.endorsedByUser) {
+                modalBtn.className = "bg-white text-black border border-white text-xs px-3 py-1.5 font-bold transition flex items-center space-x-1";
+            } else {
+                modalBtn.className = "bg-pitch-950 border border-silver-600 text-silver-200 text-xs px-3 py-1.5 font-bold hover:border-white transition flex items-center space-x-1";
+            }
+
+            renderModalComments(thread);
+
+            document.getElementById('threadDetailModal').classList.remove('hidden');
+        }
+
+        function closeThreadModal() {
+            playSfx('click');
+            document.getElementById('threadDetailModal').classList.add('hidden');
+            activeModalThreadId = null;
+        }
+
+        function renderModalComments(thread) {
+            const container = document.getElementById('modalCommentsContainer');
+            document.getElementById('modalCommentCount').innerText = thread.comments.length;
+            container.innerHTML = '';
+
+            if (thread.comments.length === 0) {
+                container.innerHTML = `<div class="text-silver-500 text-xs italic">No comments transmitted yet. Be the first to reply.</div>`;
+                return;
+            }
+
+            thread.comments.forEach(c => {
+                const item = document.createElement('div');
+                item.className = 'bg-pitch-900 border border-silver-800 p-3 text-xs space-y-1';
+                item.innerHTML = `
+                    <div class="flex justify-between items-center text-[10px]">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-white font-bold">${c.author}</span>
+                            <span class="text-silver-500">(${c.role})</span>
+                        </div>
+                        <span class="text-silver-500">${c.time}</span>
+                    </div>
+                    <p class="text-silver-300 leading-normal">${c.text}</p>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function submitReply() {
+            if (!activeModalThreadId) return;
+            const text = document.getElementById('replyInput').value.trim();
+            if (!text) return;
+
+            playSfx('post');
+            const thread = forumThreads.find(t => t.id === activeModalThreadId);
+            thread.comments.push({
+                author: "OPERATIVE #0892",
+                role: "Tier 3 Member",
+                text: text,
+                time: "JUST NOW"
+            });
+
+            document.getElementById('replyInput').value = '';
+            renderModalComments(thread);
+            renderThreads();
+        }
+
+        function toggleEndorse(e, threadId) {
+            e.stopPropagation();
+            playSfx('click');
+            const thread = forumThreads.find(t => t.id === threadId);
+            if (!thread) return;
+
+            if (thread.endorsedByUser) {
+                thread.endorsements--;
+                thread.endorsedByUser = false;
+            } else {
+                thread.endorsements++;
+                thread.endorsedByUser = true;
+            }
+            renderThreads();
+        }
+
+        function endorseActiveThread() {
+            if (!activeModalThreadId) return;
+            toggleEndorse(new Event('click'), activeModalThreadId);
+            const thread = forumThreads.find(t => t.id === activeModalThreadId);
+            document.getElementById('modalEndorseCount').innerText = thread.endorsements;
+        }
+
+        // --- FILTERING & TABS ---
+        function switchFeedTab(tabName) {
+            playSfx('click');
+            activeTab = tabName;
+            document.querySelectorAll('.feed-tab').forEach(btn => {
+                btn.className = "feed-tab bg-pitch-950 text-silver-400 font-bold px-3 py-1.5 uppercase tracking-wider border border-silver-800 hover:border-silver-500 transition";
+            });
+            document.getElementById(`tab-${tabName}`).className = "feed-tab bg-white text-black font-bold px-3 py-1.5 uppercase tracking-wider border border-white transition";
+            renderThreads();
+        }
+
+        function filterCategory(catName) {
+            playSfx('click');
+            activeCategory = catName;
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('bg-pitch-800', 'border-white', 'text-white');
+                btn.classList.add('text-silver-400', 'border-transparent');
+            });
+            event.currentTarget.classList.add('bg-pitch-800', 'border-white', 'text-white');
+            renderThreads();
+        }
+
+        function filterTag(tagName) {
+            playSfx('click');
+            activeTagFilter = tagName;
+            document.getElementById('filterBanner').classList.remove('hidden');
+            document.getElementById('filterBannerValue').innerText = tagName;
+            renderThreads();
+        }
+
+        function clearAllFilters() {
+            playSfx('click');
+            activeTagFilter = null;
+            document.getElementById('globalSearchInput').value = '';
+            document.getElementById('filterBanner').classList.add('hidden');
+            renderThreads();
+        }
+
+        function filterThreads() {
+            renderThreads();
+        }
+
+        function sortThreads() {
+            playSfx('click');
+            const val = document.getElementById('sortSelect').value;
+            if (val === 'newest') {
+                forumThreads.sort((a,b) => b.timestamp - a.timestamp);
+            } else if (val === 'endorsements') {
+                forumThreads.sort((a,b) => b.endorsements - a.endorsements);
+            } else if (val === 'replies') {
+                forumThreads.sort((a,b) => b.comments.length - a.comments.length);
+            }
+            renderThreads();
+        }
+
+        function openNewThreadModal() {
+            playSfx('click');
+            document.getElementById('newThreadModal').classList.remove('hidden');
+        }
+
+        function closeNewThreadModal() {
+            playSfx('click');
+            document.getElementById('newThreadModal').classList.add('hidden');
+        }
+
+        function submitNewThread() {
+            playSfx('post');
+            const title = document.getElementById('newTitle').value.trim();
+            const category = document.getElementById('newCategory').value;
+            const clearance = document.getElementById('newClearance').value;
+            const tagsRaw = document.getElementById('newTags').value.trim();
+            const body = document.getElementById('newBody').value.trim();
+
+            const tagsArr = tagsRaw ? tagsRaw.split(',').map(t => t.trim().startsWith('#') ? t.trim() : '#' + t.trim()) : ['#General'];
+
+            const newObj = {
+                id: Date.now(),
+                title: title,
+                category: category,
+                clearance: clearance,
+                author: "OPERATIVE #0892",
+                role: "Tier 3 Member",
+                authorIcon: "fa-dragon",
+                time: "JUST NOW",
+                timestamp: Date.now(),
+                excerpt: body.substring(0, 120) + "...",
+                body: body,
+                tags: tagsArr,
+                endorsements: 1,
+                endorsedByUser: true,
+                pinned: false,
+                comments: []
+            };
+
+            forumThreads.unshift(newObj);
+            closeNewThreadModal();
+            renderThreads();
+        }
+
+        function openWhistleblowerModal() {
+            playSfx('click');
+            document.getElementById('whistleblowerModal').classList.remove('hidden');
+        }
+
+        function closeWhistleblowerModal() {
+            playSfx('click');
+            document.getElementById('whistleblowerModal').classList.add('hidden');
+        }
+
+        function simUpload() {
+            playSfx('click');
+            document.getElementById('uploadStatusText').innerText = "ENCRYPTED FILE LOADED: evidence_log_sector4.bin (14.2 MB)";
+        }
+
+        function submitEncryptedDrop() {
+            playSfx('post');
+            alert("Whistleblower evidence locked with Zero-Knowledge encryption. Transmitted safely to the Ginhawa Council.");
+            closeWhistleblowerModal();
+        }
+
+        function openNotificationDrawer() {
+            playSfx('click');
+            alert("System Alert: You have 2 unread encrypted clearance notifications from Sector 01.");
+        }
+
+        // --- INIT ---
+        window.onload = function() {
+            renderThreads();
+        };
+    </script>
+</body>
+</html>
