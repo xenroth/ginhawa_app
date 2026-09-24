@@ -1,6 +1,6 @@
 # Ginhawa App
 
-Ginhawa is a Laravel 11 community forum and global organization application by **Akhzaroth Khan (Richard C. Cupal, LPT)**. The supplied organization and forum templates remain in the project root as source references; their pitch-black, silver-metal, scanline, Courier Prime, Oswald, Font Awesome, terminal, filtering, modal, and Web Audio interaction language is integrated into the Blade experience.
+Ginhawa is a Laravel 12 community forum and global organization application by **Akhzaroth Khan (Richard C. Cupal, LPT)**. The supplied organization and forum templates remain in the project root as source references; their pitch-black, silver-metal, scanline, Courier Prime, Oswald, Font Awesome, terminal, filtering, modal, and Web Audio interaction language is integrated into the Blade experience.
 
 ## First run
 

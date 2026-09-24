@@ -55,7 +55,15 @@ Set `GINHAWA_GITHUB_TOKEN` only for a private repository. Use a read-only token 
 
 ## E. Permissions and first boot
 
-Laravel must write to `storage/` and `bootstrap/cache/`. Use permissions `755` or `775`, depending on the hosting account’s PHP user.
+Laravel must write to `storage/` and `bootstrap/cache/`. If these directories were not included by your upload tool, create them before running Artisan:
+
+```bash
+mkdir -p bootstrap/cache
+mkdir -p storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs storage/app/public
+chmod -R 775 bootstrap/cache storage
+```
+
+Use permissions `755` or `775`, depending on the hosting account’s PHP user. On older Composer versions, use `composer dump-autoload --no-dev --optimize`; the `dump-autoload` command may not recognize `--optimize-autoloader`.
 
 Open the site once. The first request checks for the `roles` table and runs the seeded migration automatically. Initial administrator credentials:
 
