@@ -140,6 +140,13 @@ All notable Ginhawa changes are documented here. Versions follow the Git tag or 
 
 - Run `php artisan migrate --force` and `php artisan optimize:clear` after updating.
 
+## [alpha-release-v.1.0.9] - 2026-09-24
+
+### Documentation
+
+- Clarified that profile avatar, cover, and verification downloads use authenticated Laravel routes and do not require `storage:link`.
+- `storage:link` remains useful for public branding assets such as logos and favicons.
+
 ## Unreleased
 
 Future changes should be added here before the next release tag.
