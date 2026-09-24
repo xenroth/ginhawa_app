@@ -60,6 +60,14 @@ All notable Ginhawa changes are documented here. Versions follow the Git tag or 
 - The homepage is publicly viewable for orientation, while `/community`, profiles, identity downloads, and member tools remain authenticated.
 - Guest citizen-card previews are visibly locked until registration and login.
 
+## [alpha-release-v.1.0.3] - 2026-09-24
+
+### Changed
+
+- Replaced the legacy admin dashboard with a cyberpunk command-center interface.
+- Added dedicated navigation for CMS settings and verification review.
+- Improved citizen registry controls, post moderation actions, release checking, metrics, and destructive-action confirmation.
+
 ## Unreleased
 
 Future changes should be added here before the next release tag.
