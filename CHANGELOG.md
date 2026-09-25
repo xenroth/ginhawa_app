@@ -147,6 +147,32 @@ All notable Ginhawa changes are documented here. Versions follow the Git tag or 
 - Clarified that profile avatar, cover, and verification downloads use authenticated Laravel routes and do not require `storage:link`.
 - `storage:link` remains useful for public branding assets such as logos and favicons.
 
+## [alpha-release-v.1.1.0] - 2026-09-25
+
+### Added
+
+- Fully synchronized `/community` 3-column widget architecture with the database:
+  - **Column 1 (Left):** Admin-managed forum sectors with live transmission counts; network status widget showing cleared threads, verified operatives, active sectors, pending reviews, and live operative search.
+  - **Column 2 (Middle):** Swapped widget order to display the "+ New Transmission" dispatch form directly above the community transmissions feed.
+  - **Column 3 (Right):** Council directives synchronized from the database `directives` table, configurable clearance rules, and a dynamic custom widget container reserved for promotions, alliances, or group networks.
+- Backend and administrative management:
+  - Added clearance rules and custom widget (toggle, badge, title, content) management in `/admin/settings`.
+  - Added deletion endpoints for sectors (`DELETE /admin/sectors/{sector}`) and directives (`DELETE /admin/directives/{directive}`).
+  - Added non-destructive migration `2026_09_25_000009_sync_community_widgets_and_clearance_rules.php` to seed and synchronize widget defaults.
+
+### Fixed
+
+- Resolved `/community` loading and transmission submission errors:
+  - Removed accidental `+@` diff prefixes in Blade templates (`forum.blade.php`, `admin.blade.php`, `global.blade.php`, `member.blade.php`, `profile.blade.php`, `admin/settings.blade.php`) that broke Blade compilation.
+  - Replaced unsafe collection fallback in `ForumController::index` with `LengthAwarePaginator` so `$posts->total()` and `$posts->links()` never throw fatal errors.
+  - Added null-safe guards for post timestamps (`created_at?->diffForHumans()`), author models, and tag array decoding.
+  - Added inline validation error alerts and automatic fallback sector registration for new transmissions.
+  - Escaped modal attributes for titles, authors, and dispatches containing quotes or newlines.
+
+### Deployment
+
+- Run `php artisan migrate --force` and `php artisan optimize:clear` after updating.
+
 ## Unreleased
 
 Future changes should be added here before the next release tag.

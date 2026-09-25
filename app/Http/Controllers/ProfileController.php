@@ -8,11 +8,20 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    public function show(Request $request) { return view('profile', ['user' => $request->user(), 'verification' => $request->user()->verificationDocuments()->latest()->first()]); }
+    public function show(Request $request, ?\App\Models\User $user = null) { $profileUser = $user ?: $request->user(); abort_if($profileUser->profile_visibility === 'private' && $profileUser->id !== $request->user()->id, 403); abort_if($profileUser->profile_visibility === 'members' && !$request->user(), 403); return view($user ? 'member' : 'profile', ['user' => $profileUser, 'verification' => $profileUser->verificationDocuments()->latest()->first()]); }
+    public function searchMembers(Request $request) { $query = trim((string) $request->query('q', '')); return response()->json(\App\Models\User::query()->select(['id', 'name', 'citizen_number', 'designation', 'jurisdiction'])->where('id', '!=', $request->user()->id)->whereIn('profile_visibility', ['members', 'public'])->when($query, fn ($builder) => $builder->where(fn ($nested) => $nested->where('name', 'like', "%{$query}%")->orWhere('citizen_number', 'like', "%{$query}%")->orWhere('designation', 'like', "%{$query}%")))->orderBy('name')->limit(10)->get()); }
     public function media(Request $request, string $type)
     {
         abort_unless(in_array($type, ['avatar', 'cover'], true), 404);
         $path = $request->user()->{$type.'_path'};
+        abort_unless($path && Storage::disk('public')->exists($path), 404);
+        return response()->file(Storage::disk('public')->path($path));
+    }
+    public function memberMedia(Request $request, \App\Models\User $user, string $type)
+    {
+        abort_if($user->profile_visibility === 'private', 403);
+        abort_unless(in_array($type, ['avatar', 'cover'], true), 404);
+        $path = $user->{$type.'_path'};
         abort_unless($path && Storage::disk('public')->exists($path), 404);
         return response()->file(Storage::disk('public')->path($path));
     }
