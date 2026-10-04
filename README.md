@@ -19,7 +19,21 @@ The web middleware checks for the `roles` table on the first request and automat
 - `/` global organization page, four pillars, encrypted terminal
 - `/community` member-only community hub with sector filtering, search, thread modal, replies, and transmission form
 - `/register` pending registration workflow
+- `/profile` member dashboard, citizen ID card, and verification submissions
 - `/admin` moderator and administrator dashboard
+
+## Community
+
+- Live online-citizen presence and registered-citizens count, driven by real session and database queries.
+- Clickable directives widget, per-sector hashtag filtering, and up/down reactions with a coming-soon hint for unsupported types.
+- Council approval flow: sectors with `REQUIRES APPROVAL` enabled keep admin moderation; open sectors publish citizen transmissions instantly. Administrator and moderator posts are always approved.
+- Mobile-safe scrolling in the transmission panel with an on-screen keyboard.
+
+## Admin
+
+- Dashboard with pagination and filtering across users, sectors, and directives.
+- Per-sector `REQUIRES APPROVAL` toggles in the Sectors & Directives settings.
+- CMS settings for SEO, site identity, logo, and favicon. Uploaded favicons and logos are served from the public disk through `public/storage`; the root `.htaccess` allows `/storage/*` requests so public branding assets resolve while `.env` and the raw application directories stay protected.
 
 ## RBAC
 
@@ -27,9 +41,9 @@ The web middleware checks for the `roles` table on the first request and automat
 
 ## Implementation map
 
-- `app/Models`: users, roles, and posts
-- `app/Http/Controllers`: forum, auth, and admin actions
+- `app/Models`: users, roles, sectors, directives, posts, and community interactions
+- `app/Http/Controllers`: forum, auth, admin, and community-interaction actions
 - `app/Http/Middleware`: first-load installation and role checks
-- `database/migrations`: role/user and post schema
+- `database/migrations`: role/user, post, and citizen-number schema
 - `database/seeders/DatabaseSeeder.php`: initial roles and administrator
 - `resources/views`: global, forum, auth, admin, installer, and shared layout
