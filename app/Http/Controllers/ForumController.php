@@ -17,7 +17,11 @@ class ForumController extends Controller
     {
         $this->ensureSchema();
         try {
-            $posts = Post::with('author', 'reactions')->visible($request->user())->orderByDesc('is_pinned')->orderByDesc('created_at')->get();
+            $posts = Post::with('author', 'reactions')->visible($request->user())->orderByDesc('is_pinned')->orderByDesc('created_at')->paginate(10, ['*'], 'posts_page')->withQueryString();
+            $lastSeen = $request->user()->community_last_seen_at;
+            $newCount = $lastSeen ? Post::visible($request->user())->where('created_at', '>', $lastSeen)->where('user_id', '!=', $request->user()->id)->count() : 0;
+            $approvedCount = Post::visible($request->user())->where('status', 'approved')->count();
+            $request->user()->forceFill(['community_last_seen_at' => now()])->save();
             $sectors = Sector::where('is_active', true)->orderBy('sort_order')->pluck('name')->all();
             $sectors = $sectors ?: ['MANIFESTO', 'OPERATIVES', 'PRESERVATION', 'ARCHIVES', 'LOUNGE'];
             $citizensCount = User::count();
@@ -38,12 +42,25 @@ class ForumController extends Controller
                 'citizensCount' => $citizensCount,
                 'onlineCount' => $onlineCount,
                 'directive' => $directive,
-                'myReactions' => $myReactions,
+                'myReactions' => $myReactions, 'newCount' => $newCount, 'approvedCount' => $approvedCount,
             ]);
         } catch (\Throwable $exception) {
             Log::error('Community transmission load failed.', ['exception' => $exception]);
-            return view('forum', ['posts' => collect(), 'sectors' => ['MANIFESTO', 'OPERATIVES', 'PRESERVATION', 'ARCHIVES', 'LOUNGE'], 'citizensCount' => 0, 'onlineCount' => 0, 'directive' => null, 'myReactions' => collect()])->withErrors(['system' => 'The community signal is temporarily unavailable. Please try again after the council restores the database connection.']);
+            return view('forum', ['posts' => collect(), 'sectors' => ['MANIFESTO', 'OPERATIVES', 'PRESERVATION', 'ARCHIVES', 'LOUNGE'], 'citizensCount' => 0, 'onlineCount' => 0, 'directive' => null, 'myReactions' => collect(), 'newCount' => 0, 'approvedCount' => 0])->withErrors(['system' => 'The community signal is temporarily unavailable. Please try again after the council restores the database connection.']);
         }
+    }
+
+    public function more(Request $request)
+    {
+        $this->ensureSchema();
+        $page = max(1, (int) $request->query('posts_page', 2));
+        $posts = Post::with('author', 'reactions')->visible($request->user())->orderByDesc('is_pinned')->orderByDesc('created_at')->paginate(10, ['*'], 'posts_page', $page);
+        $html = '';
+        foreach ($posts as $post) {
+            $html .= view('forum._post', ['post' => $post, 'myReactions' => DB::table('post_reactions')->where('user_id', $request->user()->id)->pluck('value', 'post_id')])->render();
+        }
+        return response($html, 200, ['Content-Type' => 'text/html'])
+            ->header('X-Has-More', $posts->hasMorePages() ? '1' : '0');
     }
 
     public function store(Request $request)
