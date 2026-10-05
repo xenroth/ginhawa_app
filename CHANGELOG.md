@@ -216,3 +216,13 @@ Future changes should be added here before the next release tag.
 - Admin self-downgrade guard now checks the 'administrator' role name (previous check on 'admin' never matched)
 ### UX
 - New transmission textarea auto-expands as text is entered or Enter is pressed (max 600px)
+
+## v.1.1.12 (2026-10-05)
+### Fixed
+- Thumbnails for posts with 3+ photos: Blade left a mid-line @else uncompiled in the minified _post partial, so the media strip rendered empty. Directives now sit on their own lines.
+- READ INTEL photo-nav broken string concat (still present in the compiled page) — prev/next buttons restored; the same syntax error had been killing the community script.
+- openTransmission script: removed one stray closing brace.
+- LOAD MORE: now always fetches /community/more?posts_page=N (previously it fetched the full /community page, which re-inserted an unbound LOAD MORE link that never went away).
+- READ INTEL modal: X close button moved into a flex header with the title (it was being overlapped by full-width photos); media block clears the float.
+### Changed
+- Notifications now deep-link: post/comment notifications link to /community?open_post=<id>; the community page auto-scrolls to and opens that transmission in the modal.

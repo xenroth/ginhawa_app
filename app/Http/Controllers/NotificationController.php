@@ -41,7 +41,10 @@ class NotificationController extends Controller
     {
         $subject = $n->subject;
         if ($subject instanceof \App\Models\Post) {
-            return route('community').'#post-'.$subject->id;
+            return route('community').'?open_post='.$subject->id;
+        }
+        if ($subject instanceof \App\Models\Comment) {
+            return route('community').'?open_post='.$subject->post_id;
         }
         return route('community');
     }
