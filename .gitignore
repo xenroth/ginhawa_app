@@ -13,4 +13,10 @@
 /.idea/
 /.vscode/
 *.log
-!.gitignore
+!.gitignore*.env
+!env.example
+!env_fresh2.env.bak
+fresh/*.txt
+fresh/*.env
+*.env.*
+!env.example
