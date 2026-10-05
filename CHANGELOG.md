@@ -199,3 +199,11 @@ Future changes should be added here before the next release tag.
 ### Deployment
 
 - Run `php artisan optimize:clear` after updating. The `/storage/branding` public disk now serves correctly on shared hosting.
+
+## v.1.1.5 - 2026-10-05
+### Fixed
+- /community 500: rewrote @forelse construct to if/foreach/else (blade compile left @forelse uncompiled on server)
+### Security
+- Admin self-downgrade guard now checks the 'administrator' role name (previous check on 'admin' never matched)
+### UX
+- New transmission textarea auto-expands as text is entered or Enter is pressed (max 600px)
