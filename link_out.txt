@@ -1,0 +1,7 @@
+link_out:0
+
+   ERROR  The [public/storage] link already exists.  
+
+pub_storage_islink:1
+target:/home/hawkeye1/ginhawa.theelitecodex.com/storage/app/public
+posts_dir:no

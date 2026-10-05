@@ -1,0 +1,11 @@
+HTTP/2 302 
+server: openresty
+date: Sun, 04 Oct 2026 01:26:52 GMT
+content-type: text/html; charset=utf-8
+cache-control: no-cache, private
+set-cookie: XSRF-TOKEN=eyJpdiI6Ik5ZUWVKKzRNa3pES1BNSHZ2RVIxSHc9PSIsInZhbHVlIjoiMHdPZ09hOCtmMVJsRys2QVZ3Mld0aG53VlRjNmpUbE5RY2Q3QTRScFltcENQYmRXSXRLSnNWR0lTa1JCK1d0R0NXREJ1WVpQaUVFWElHWnZMbmVlSExMck83L0VlNGtrYmh4VTFxazNSTmtzc2UxY3FwNUF5MjMrOU9UMU1oSVEiLCJtYWMiOiI2M2U4NjViMTE1MTFkNDQxYmNmNDk0Zjc2YWFmNjQxNzNlMzQzNDUyZTMzMmQyZWY4MzUzMTk2MDQ4ZjkyNjAyIiwidGFnIjoiIn0%3D; expires=Sun, 04 Oct 2026 03:26:52 GMT; Max-Age=7200; path=/; secure; samesite=lax
+set-cookie: ginhawa-session=eyJpdiI6IjhWdG9UVTYzckRpTFFtOS9oSThhWXc9PSIsInZhbHVlIjoiVldxZk1sT0k5VkJlallOMEk1K3Y5VkZkQjZ4ZUptK0Fxd2pkVndLSVRCRERLM21NQlRjRndBRGkrVzVwQ1NEcDRZY2kyNU9YRkxBdExCYVB0Mm1RWGcyV2RCbEdGQlNHMlhNYXJXdlc5eTZTQmwweloyc2hUTkFuYllFOFBjVWsiLCJtYWMiOiIxNmI5MjM1N2M3NWZiNDA1MjRjNDVmMjI4YWNjYjkxZWFhYjBjMTBlNTY1ZThmZTgwMjllNTNiNzIwNDNlYTZlIiwidGFnIjoiIn0%3D; expires=Sun, 04 Oct 2026 03:26:52 GMT; Max-Age=7200; path=/; secure; httponly; samesite=lax
+location: https://ginhawa.theelitecodex.com/login
+cache-control: max-age=0
+expires: Sun, 04 Oct 2026 01:26:52 GMT
+

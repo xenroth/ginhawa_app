@@ -1,0 +1,10 @@
+drwxr-xr-x    2 hawkeye1   hawkeye1         4096 Oct  3 06:54 .
+drwxrwxr-x    6 hawkeye1   hawkeye1           82 Oct  3 06:52 ..
+-rw-r--r--    1 hawkeye1   hawkeye1           14 Oct  3 06:52 .gitignore
+-rwxr-xr-x    1 hawkeye1   hawkeye1         6626 Oct  3 06:52 09f12de4eb44c5127dda6be91918c413.php
+-rwxr-xr-x    1 hawkeye1   hawkeye1         6927 Oct  3 06:52 41c91539bc927e8f8a499d69ace95134.php
+-rwxr-xr-x    1 hawkeye1   hawkeye1          443 Oct  3 06:52 587039759e6d00aee3a8a485735f6045.php
+-rwxr-xr-x    1 hawkeye1   hawkeye1        13101 Oct  3 06:52 708f1576522d1d516d18d49aee36beb7.php
+-rwxr-xr-x    1 hawkeye1   hawkeye1         7627 Oct  3 06:54 97467241f07730a5ee887bad046123f6.php
+-rwxr-xr-x    1 hawkeye1   hawkeye1         1047 Oct  3 06:54 b63f332dddc6da7e3d5145be4a9d5fb7.php
+-rwxr-xr-x    1 hawkeye1   hawkeye1        12456 Oct  3 06:52 f57f90a907ced0dd7624e781e278c1ec.php

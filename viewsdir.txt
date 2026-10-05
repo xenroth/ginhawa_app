@@ -1,0 +1,11 @@
+drwxr-xr-x    5 hawkeye1   hawkeye1         4096 Oct  3 06:36 .
+drwxr-xr-x    3 hawkeye1   hawkeye1           27 Sep 24 07:34 ..
+drwxr-xr-x    2 hawkeye1   hawkeye1           75 Sep 24 09:59 admin
+-rw-r--r--    1 hawkeye1   hawkeye1        10622 Oct  3 06:50 admin.blade.php
+-rw-r--r--    1 hawkeye1   hawkeye1         7236 Oct  3 06:36 admin.blade.php.bak
+drwxr-xr-x    2 hawkeye1   hawkeye1           67 Sep 24 08:55 auth
+-rw-r--r--    1 hawkeye1   hawkeye1         6561 Oct  3 06:20 forum.blade.php
+-rw-r--r--    1 hawkeye1   hawkeye1        11565 Sep 24 09:23 global.blade.php
+-rw-r--r--    1 hawkeye1   hawkeye1          815 Sep 24 07:34 install.blade.php
+drwxr-xr-x    2 hawkeye1   hawkeye1           35 Sep 24 09:23 layouts
+-rw-r--r--    1 hawkeye1   hawkeye1         8490 Sep 24 09:59 profile.blade.php
