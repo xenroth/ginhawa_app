@@ -5,7 +5,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommunityInteractionController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/notifications', [NotificationController::class, 'index'])->middleware('auth')->name('notifications.index');
+Route::post('/notifications/read', [NotificationController::class, 'readAll'])->middleware('auth')->name('notifications.readAll');
 
 Route::view('/', 'global')->name('home');
 Route::view('/login', 'auth.login')->middleware('guest')->name('login');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Connection;
 use App\Models\Message;
+use App\Models\Notification;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Log;
 
 class CommunityInteractionController extends Controller
 {
-    public function comment(Request $request, Post $post) { abort_unless($request->user()->canPost(), 403, 'Your registration is awaiting approval.'); $data = $request->validate(['body' => ['required', 'string', 'max:5000'], 'parent_id' => ['nullable', 'integer', 'exists:comments,id']]); try { $parentId = null; if (!empty($data['parent_id'])) { $parent = Comment::find($data['parent_id']); abort_unless($parent && $parent->post_id === $post->id, 422, 'Invalid parent comment.'); $parentId = $parent->id; } $post->comments()->create(['user_id' => $request->user()->id, 'body' => $data['body'], 'status' => 'approved', 'parent_id' => $parentId]); return back()->with('success', 'Reply transmitted.'); } catch (\Throwable $exception) { Log::error('Community reply failed.', ['exception' => $exception, 'post_id' => $post->id]); return back()->withErrors(['system' => 'This reply could not be transmitted right now.']); } }
+    public function comment(Request $request, Post $post) { abort_unless($request->user()->canPost(), 403, 'Your registration is awaiting approval.'); $data = $request->validate(['body' => ['required', 'string', 'max:5000'], 'parent_id' => ['nullable', 'integer', 'exists:comments,id']]); try { $parentId = null; if (!empty($data['parent_id'])) { $parent = Comment::find($data['parent_id']); abort_unless($parent && $parent->post_id === $post->id, 422, 'Invalid parent comment.'); $parentId = $parent->id; } $post->comments()->create(['user_id' => $request->user()->id, 'body' => $data['body'], 'status' => 'approved', 'parent_id' => $parentId]); if ($parentId) { $parentModel = Comment::find($parentId); Notification::fire($parentModel->user_id, $request->user()->id, 'reply', $post, \Illuminate\Support\Str::limit($data['body'], 120)); } else { Notification::fire($post->user_id, $request->user()->id, 'comment', $post, \Illuminate\Support\Str::limit($data['body'], 120)); } return back()->with('success', 'Reply transmitted.'); } catch (\Throwable $exception) { Log::error('Community reply failed.', ['exception' => $exception, 'post_id' => $post->id]); return back()->withErrors(['system' => 'This reply could not be transmitted right now.']); } }
 
     public function commentsJson(Request $request, Post $post)
     {
@@ -55,6 +56,9 @@ class CommunityInteractionController extends Controller
             } else {
                 $comment->reactions()->create(['user_id' => $request->user()->id, 'value' => $data['value']]);
                 $mine = $data['value'];
+                if ($data['value'] === 'up') {
+                    Notification::fire($comment->user_id, $request->user()->id, 'react_comment', $comment->post);
+                }
             }
             return response()->json([
                 'ok' => true,
@@ -68,8 +72,8 @@ class CommunityInteractionController extends Controller
         }
     }
 
-    public function connect(Request $request, User $user) { abort_unless($request->user()->id !== $user->id, 422); Connection::firstOrCreate(['requester_id' => $request->user()->id, 'recipient_id' => $user->id], ['status' => 'pending']); return back()->with('success', 'Connection request sent.'); }
-    public function message(Request $request, User $user) { $data = $request->validate(['body' => ['required', 'string', 'max:5000']]); Message::create(['sender_id' => $request->user()->id, 'recipient_id' => $user->id, 'body' => $data['body']]); return back()->with('success', 'Encrypted message sent.'); }
+    public function connect(Request $request, User $user) { abort_unless($request->user()->id !== $user->id, 422); Connection::firstOrCreate(['requester_id' => $request->user()->id, 'recipient_id' => $user->id], ['status' => 'pending']); Notification::fire($user->id, $request->user()->id, 'connect'); return back()->with('success', 'Connection request sent.'); }
+    public function message(Request $request, User $user) { $data = $request->validate(['body' => ['required', 'string', 'max:5000']]); Message::create(['sender_id' => $request->user()->id, 'recipient_id' => $user->id, 'body' => $data['body']]); Notification::fire($user->id, $request->user()->id, 'message', null, \Illuminate\Support\Str::limit($data['body'], 120)); return back()->with('success', 'Encrypted message sent.'); }
 
     public function react(Request $request, Post $post)
     {
@@ -86,6 +90,9 @@ class CommunityInteractionController extends Controller
             } else {
                 $post->reactions()->create(['user_id' => $request->user()->id, 'value' => $data['value']]);
                 $mine = $data['value'];
+                if ($data['value'] === 'up') {
+                    Notification::fire($post->user_id, $request->user()->id, 'upvote', $post);
+                }
             }
             return response()->json([
                 'ok' => true,
