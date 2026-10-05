@@ -1,5 +1,6 @@
 # Changelog
 
+- 2026-10-05: NEW TRANSMISSION is now a pop-out modal on /community (fixed overlay, close button) instead of an anchor scroll to the inline form.
 - 2026-10-05: AdminController.updateUser now blocks an administrator from downgrading their own role (self-lockout guard, error: An administrator cannot downgrade its own role).
 
 All notable Ginhawa changes are documented here. Versions follow the Git tag or the value stored in `VERSION`.
