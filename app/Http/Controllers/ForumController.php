@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class ForumController extends Controller
 {
@@ -42,7 +43,7 @@ class ForumController extends Controller
                 'citizensCount' => $citizensCount,
                 'onlineCount' => $onlineCount,
                 'directive' => $directive,
-                'myReactions' => $myReactions, 'newCount' => $newCount, 'approvedCount' => $approvedCount,
+                'myReactions' => $myReactions, 'newCount' => $newCount, 'approvedCount' => $approvedCount, 'newSince' => $lastSeen ? \Carbon\Carbon::parse($lastSeen) : now(),
             ]);
         } catch (\Throwable $exception) {
             Log::error('Community transmission load failed.', ['exception' => $exception]);
@@ -61,6 +62,33 @@ class ForumController extends Controller
         }
         return response($html, 200, ['Content-Type' => 'text/html'])
             ->header('X-Has-More', $posts->hasMorePages() ? '1' : '0');
+    }
+
+    public function fresh(Request $request)
+    {
+        $this->ensureSchema();
+        $user = $request->user();
+        $since = $user->community_last_seen_at;
+        $sinceParam = $request->query('since');
+        if ($sinceParam) {
+            try { $since = Carbon::parse($sinceParam); } catch (\Throwable $e) { $since = $since; }
+        }
+        $posts = collect();
+        $count = 0;
+        if ($since) {
+            $posts = Post::with('author', 'reactions')->visible($user)
+                ->where('created_at', '>', $since)
+                ->where('user_id', '!=', $user->id)
+                ->orderByDesc('is_pinned')->orderByDesc('created_at')->get();
+            $count = $posts->count();
+        }
+        $user->forceFill(['community_last_seen_at' => now()])->save();
+        $html = '';
+        foreach ($posts as $post) {
+            $html .= view('forum._post', ['post' => $post, 'myReactions' => DB::table('post_reactions')->where('user_id', $user->id)->pluck('value', 'post_id')])->render();
+        }
+        return response($html, 200, ['Content-Type' => 'text/html'])
+            ->header('X-New-Count', (string) $count);
     }
 
     public function store(Request $request)

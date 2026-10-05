@@ -30,6 +30,7 @@ Route::post('/members/{user}/connect', [CommunityInteractionController::class, '
 Route::post('/members/{user}/message', [CommunityInteractionController::class, 'message'])->middleware('auth')->name('members.message');
 Route::get('/community', [ForumController::class, 'index'])->middleware('auth')->name('community');
 Route::get('/community/more', [ForumController::class, 'more'])->middleware('auth')->name('community.more');
+Route::get('/community/fresh', [ForumController::class, 'fresh'])->middleware('auth')->name('community.fresh');
 Route::post('/community/posts', [ForumController::class, 'store'])->middleware('auth')->name('posts.store');
 Route::patch('/community/posts/{post}', [ForumController::class, 'update'])->middleware('auth')->name('posts.update');
 Route::delete('/community/posts/{post}', [ForumController::class, 'destroy'])->middleware('auth')->name('posts.destroy');
