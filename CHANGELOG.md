@@ -147,24 +147,6 @@ All notable Ginhawa changes are documented here. Versions follow the Git tag or 
 - Clarified that profile avatar, cover, and verification downloads use authenticated Laravel routes and do not require `storage:link`.
 - `storage:link` remains useful for public branding assets such as logos and favicons.
 
-## [alpha-release-v.1.1.1] - 2026-10-05
-
-### Added
-
-- Full server-state sync to the repository: community and admin reworks, real-time online-citizen counts, clickable directives widget, per-sector hashtag filtering, comment threading and reactions.
-- Per-sector `REQUIRES APPROVAL` toggles and instant publish for open sectors.
-- Site mailer integration (send-on-approval) wired into user approval and verification review.
-- Mobile-safe scrolling in the community transmission panel.
-
-### Fixed
-
-- Favicon uploads now resolve: the root `.htaccess` no longer forbids `/storage/*` requests, so public branding assets are served through `public/storage` while `.env` and the raw application directories stay protected.
-- README updated to the current application status.
-
-### Deployment
-
-- Run `php artisan optimize:clear` after updating. The `/storage/branding` public disk now serves correctly on shared hosting.
-
 ## [alpha-release-v.1.1.0] - 2026-09-25
 
 ### Added
@@ -194,3 +176,22 @@ All notable Ginhawa changes are documented here. Versions follow the Git tag or 
 ## Unreleased
 
 Future changes should be added here before the next release tag.
+
+
+## [alpha-release-v.1.1.1] - 2026-10-05
+
+### Added
+
+- Full server-state sync to the repository: community and admin reworks, real-time online-citizen counts, clickable directives widget, per-sector hashtag filtering, comment threading and reactions.
+- Per-sector `REQUIRES APPROVAL` toggles and instant publish for open sectors.
+- Site mailer integration (send-on-approval) wired into user approval and verification review.
+- Mobile-safe scrolling in the community transmission panel.
+
+### Fixed
+
+- Favicon uploads now resolve: the root `.htaccess` no longer forbids `/storage/*` requests, so public branding assets are served through `public/storage` while `.env` and the raw application directories stay protected.
+- README updated to the current application status.
+
+### Deployment
+
+- Run `php artisan optimize:clear` after updating. The `/storage/branding` public disk now serves correctly on shared hosting.
