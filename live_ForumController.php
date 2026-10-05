@@ -17,7 +17,11 @@ class ForumController extends Controller
     {
         $this->ensureSchema();
         try {
-            $posts = Post::with('author', 'reactions')->visible($request->user())->orderByDesc('is_pinned')->orderByDesc('created_at')->get();
+            $posts = Post::with('author', 'reactions')->visible($request->user())->orderByDesc('is_pinned')->orderByDesc('created_at')->paginate(10, ['*'], 'posts_page')->withQueryString();
+            $lastSeen = $request->user()->community_last_seen_at;
+            $newCount = $lastSeen ? Post::visible($request->user())->where('created_at', '>', $lastSeen)->where('user_id', '!=', $request->user()->id)->count() : 0;
+            $approvedCount = Post::visible($request->user())->where('status', 'approved')->count();
+            $request->user()->forceFill(['community_last_seen_at' => now()])->save();
             $sectors = Sector::where('is_active', true)->orderBy('sort_order')->pluck('name')->all();
             $sectors = $sectors ?: ['MANIFESTO', 'OPERATIVES', 'PRESERVATION', 'ARCHIVES', 'LOUNGE'];
             $citizensCount = User::count();
@@ -38,11 +42,11 @@ class ForumController extends Controller
                 'citizensCount' => $citizensCount,
                 'onlineCount' => $onlineCount,
                 'directive' => $directive,
-                'myReactions' => $myReactions,
+                'myReactions' => $myReactions, 'newCount' => $newCount, 'approvedCount' => $approvedCount,
             ]);
         } catch (\Throwable $exception) {
             Log::error('Community transmission load failed.', ['exception' => $exception]);
-            return view('forum', ['posts' => collect(), 'sectors' => ['MANIFESTO', 'OPERATIVES', 'PRESERVATION', 'ARCHIVES', 'LOUNGE'], 'citizensCount' => 0, 'onlineCount' => 0, 'directive' => null, 'myReactions' => collect()])->withErrors(['system' => 'The community signal is temporarily unavailable. Please try again after the council restores the database connection.']);
+            return view('forum', ['posts' => collect(), 'sectors' => ['MANIFESTO', 'OPERATIVES', 'PRESERVATION', 'ARCHIVES', 'LOUNGE'], 'citizensCount' => 0, 'onlineCount' => 0, 'directive' => null, 'myReactions' => collect(), 'newCount' => 0, 'approvedCount' => 0])->withErrors(['system' => 'The community signal is temporarily unavailable. Please try again after the council restores the database connection.']);
         }
     }
 
@@ -52,7 +56,9 @@ class ForumController extends Controller
         $this->ensureSchema();
         $data = $request->validate(['title' => ['required', 'string', 'max:180'], 'body' => ['required', 'string'], 'sector' => ['required', Rule::exists('sectors', 'name')], 'clearance' => ['required', 'in:public,member,enforcer'], 'tags' => ['nullable', 'string'], 'media' => ['nullable', 'array', 'max:6'], 'media.*' => ['file', 'mimes:jpg,jpeg,png,gif', 'max:25600']]);
         $data['user_id'] = $request->user()->id;
-        $data['status'] = $request->user()->hasAnyRole(['administrator', 'moderator']) ? 'approved' : 'pending';
+        $sectorModel = Sector::where('name', $data['sector'])->first();
+        $sectorNeedsApproval = $sectorModel ? (bool) $sectorModel->requires_approval : true;
+        $data['status'] = ($request->user()->hasAnyRole(['administrator', 'moderator']) || !$sectorNeedsApproval) ? 'approved' : 'pending';
         $data['tags'] = collect(preg_split('/[\s,]+/', $data['tags'] ?? ''))->map(fn ($tag) => trim($tag))->filter()->unique()->values()->all();
         try {
             $paths = [];

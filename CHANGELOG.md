@@ -1,4 +1,7 @@
 ### 2026-10-05 (latest)
+- /community feed now paginated (10 per page) with a LOAD MORE TRANSMISSIONS link; media strips capped to a 3-image grid with a '+N more' label so overflowing content can't break the layout. New-transmission notification: users see a 'N NEW TRANSMISSIONS SINCE YOUR LAST VISIT' pill (tracks community_last_seen_at, migration 2026_10_05_000012) that scrolls to the new posts on tap. Sidebar CLEARED THREADS metric now server-counted. v.1.1.8
+
+### 2026-10-05 (latest)
 - Password features shipped: profile password change verified live; direct admin per-user password reset (administrator only); public forgot-password request queue (POST /forgot-password creates a pending request; admin dashboard section sets a new password or rejects). New PasswordResetRequest model + migration 2026_10_05_000011. Admin self-downgrade guard fixed to compare the real role name 'administrator'. v.1.1.7
 
 # Changelog
