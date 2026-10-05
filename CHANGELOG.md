@@ -1,5 +1,7 @@
 # Changelog
 
+- 2026-10-05: AdminController.updateUser now blocks an administrator from downgrading their own role (self-lockout guard, error: An administrator cannot downgrade its own role).
+
 All notable Ginhawa changes are documented here. Versions follow the Git tag or the value stored in `VERSION`.
 
 ## [alpha-release-v.1.0.0] - 2026-09-24
