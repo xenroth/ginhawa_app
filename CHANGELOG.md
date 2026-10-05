@@ -1,5 +1,8 @@
 # Changelog
 
+### 2026-10-05 (later)
+- Fix: stale compiled view in storage/framework/views2 served the broken @if(count($posts)) block as raw text (orphan else, 500 on /community). Rebuilt forum.blade.php with whitespace-separated directives, cleared the view cache; fresh compile confirmed clean. v.1.1.6
+
 - 2026-10-05: Pinned directive banner added to the top of the /community feed (title + body of the active council directive, links to the directives section).
 - 2026-10-05: NEW TRANSMISSION is now a pop-out modal on /community (fixed overlay, close button) instead of an anchor scroll to the inline form.
 - 2026-10-05: AdminController.updateUser now blocks an administrator from downgrading their own role (self-lockout guard, error: An administrator cannot downgrade its own role).
