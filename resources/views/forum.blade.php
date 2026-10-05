@@ -4,7 +4,6 @@
 @if($newCount > 0)<button id="newTxNotif" type="button" onclick="document.getElementById('postGrid').scrollIntoView({behavior:'smooth'});this.remove()" class="mb-4 block w-full border-2 border-white bg-white p-3 text-center text-xs font-bold tracking-widest text-black">🔔 {{ $newCount }} NEW TRANSMISSION{{ $newCount == 1 ? '' : 'S' }} SINCE YOUR LAST VISIT — TAP TO LOAD</button>@endif
 @if (count($posts))
 @foreach($posts as $post)@include('forum._post')@endforeach
-@endforeach
 @else<div class="border border-silver-800 p-10 text-center text-sm text-silver-500">NO CLEARED TRANSMISSIONS FOUND.</div>
 @endif
 @if(method_exists($posts, 'hasMorePages') && $posts->hasMorePages())<a href="{{ $posts->nextPageUrl() }}" class="block border border-silver-700 bg-pitch-900 p-3 text-center text-xs tracking-widest text-silver-300 hover:border-white hover:text-white">LOAD MORE TRANSMISSIONS ({{ $posts->total() }} TOTAL)</a>@endif
