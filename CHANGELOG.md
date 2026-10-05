@@ -1,3 +1,6 @@
+### 2026-10-05 (latest)
+- Password features shipped: profile password change verified live; direct admin per-user password reset (administrator only); public forgot-password request queue (POST /forgot-password creates a pending request; admin dashboard section sets a new password or rejects). New PasswordResetRequest model + migration 2026_10_05_000011. Admin self-downgrade guard fixed to compare the real role name 'administrator'. v.1.1.7
+
 # Changelog
 
 ### 2026-10-05 (later)
