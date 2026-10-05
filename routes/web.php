@@ -1,19 +1,18 @@
 <?php
+use App\Http\Controllers\NotificationController;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommunityInteractionController;
-use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/notifications', [NotificationController::class, 'index'])->middleware('auth')->name('notifications.index');
-Route::post('/notifications/read', [NotificationController::class, 'readAll'])->middleware('auth')->name('notifications.readAll');
 
 Route::view('/', 'global')->name('home');
 Route::view('/login', 'auth.login')->middleware('guest')->name('login');
 Route::view('/register', 'auth.register')->middleware('guest')->name('register');
+Route::view('/forgot-password', 'auth.forgot')->middleware('guest')->name('password.request');
+Route::post('/forgot-password', [AuthController::class, 'requestPasswordReset'])->middleware('guest')->name('password.request.store');
 Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
 Route::post('/register', [AuthController::class, 'register'])->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
@@ -48,4 +47,9 @@ Route::post('/admin/sectors', [AdminController::class, 'storeSector'])->middlewa
 Route::post('/admin/directives', [AdminController::class, 'storeDirective'])->middleware(['auth', 'role:administrator'])->name('admin.directives.store');
 Route::patch('/admin/users/{user}/identity', [AdminController::class, 'assignIdentity'])->middleware(['auth', 'role:administrator'])->name('admin.users.identity');
 Route::get('/admin/users/search', [AdminController::class, 'searchUsers'])->middleware(['auth', 'role:administrator'])->name('admin.users.search');
+Route::patch('/admin/password-requests/{passwordRequest}', [AdminController::class, 'handlePasswordRequest'])->middleware(['auth', 'role:administrator'])->name('admin.password-requests.update');
+Route::patch('/admin/users/{user}/password', [AdminController::class, 'resetPassword'])->middleware(['auth', 'role:administrator'])->name('admin.password.reset');
 Route::patch('/admin/verifications/{verification}', [AdminController::class, 'reviewVerification'])->middleware(['auth', 'role:administrator,moderator'])->name('admin.verifications.update');
+
+Route::get('/notifications', [NotificationController::class, 'index'])->middleware('auth')->name('notifications.index');
+Route::post('/notifications/read', [NotificationController::class, 'readAll'])->middleware('auth')->name('notifications.readAll');

@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\PasswordResetRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\SiteSetting;
 
@@ -24,5 +25,6 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Registration received. Your citizen number has been reserved and council approval is required before posting.');
     }
     public function login(Request $request) { $credentials = $request->validate(['email' => ['required', 'email'], 'password' => ['required']]); if (!Auth::attempt($credentials)) return back()->withErrors(['email' => 'Credentials rejected.']); $request->session()->regenerate(); return redirect()->intended('/community'); }
+    public function requestPasswordReset(Request $request) { $data = $request->validate(['email' => ['required', 'email']]); $user = User::where('email', $data['email'])->first(); if ($user) { PasswordResetRequest::create(['email' => $data['email'], 'user_id' => $user->id, 'status' => 'pending']); } return redirect()->route('login')->with('success', 'Reset request received. The council will review it and set a new password for your account.'); }
     public function logout(Request $request) { Auth::logout(); $request->session()->invalidate(); $request->session()->regenerateToken(); return redirect('/'); }
 }
