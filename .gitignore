@@ -20,3 +20,13 @@ fresh/*.txt
 fresh/*.env
 *.env.*
 !env.example
+
+# workspace dump junk — never commit again
+/ftpget.sh
+/creds.txt
+/*env_remote.txt
+/live_env*.txt
+/fresh_env*
+/*_runner.php
+/jar*.txt
+/*.txt
